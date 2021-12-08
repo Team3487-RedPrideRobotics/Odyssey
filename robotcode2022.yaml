@@ -221,10 +221,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Drive}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id010 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id010
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
@@ -243,10 +243,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: None}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id011 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id011
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: false}
     Base: Command
@@ -272,10 +272,10 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Abrell-
       Tech\', extension: null, folder: true, name: Wiring file location, validators: null,
-    value: 'C:\Users\Abrell- Tech\Documents\GitHub\RobotCode2022'}
+    value: .\}
   Export Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Abrell-
       Tech\FRCProjects', extension: null, folder: true, name: Export Directory, validators: null,
-    value: 'C:\Users\Abrell- Tech\Documents\GitHub\RobotCode2022\robotbuilder'}
+    value: robotbuilder}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: AutoCommand}
 Base: Robot
