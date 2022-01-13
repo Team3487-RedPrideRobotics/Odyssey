@@ -29,5 +29,10 @@ public class Constants {
 
 
    }
+   public static final class ManipulatorConstants{
+
+      public static final int deployPort = 2;
+      public static final int inputPort = 3;
+   }
 }
 
