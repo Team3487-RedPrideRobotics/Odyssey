@@ -93,7 +93,7 @@ private Encoder rightEncoder;
     }
 
     public double[] getEncoderDistance(){
-        double[] distances={leftEncoder.getDistance(), rightEncoder.getDistance()}
+        double[] distances={leftEncoder.getDistance(), rightEncoder.getDistance()};
         return distances;
     }
 

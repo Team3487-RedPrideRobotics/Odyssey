@@ -33,7 +33,8 @@ public class Constants {
     public static final int rightEncoder2 = 3;
     public static final boolean rightEncoderInverted = false;
     public static final double distancePerPulse = 1; //TODO: find actual distance per pulse
-    public static final double driveSpeed = 0.5;
+    public static final double driveSpeed = 1;
+   public static final double deadzone = 0.2;
 
 
    }
