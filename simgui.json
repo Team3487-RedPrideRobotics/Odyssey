@@ -1,5 +1,10 @@
 {
   "HALProvider": {
+    "DIO": {
+      "window": {
+        "visible": true
+      }
+    },
     "PWM Outputs": {
       "window": {
         "visible": true
@@ -13,7 +18,18 @@
       "/LiveWindow/Drive/Differential Drive 1": "DifferentialDrive",
       "/LiveWindow/Example": "Subsystem",
       "/LiveWindow/Manipulator": "Subsystem",
+      "/LiveWindow/Ungrouped/DigitalInput[6]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[7]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[8]": "Digital Input",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+    }
+  },
+  "NetworkTables": {
+    "LiveWindow": {
+      "open": true
+    },
+    "Shuffleboard": {
+      "open": true
     }
   }
 }
