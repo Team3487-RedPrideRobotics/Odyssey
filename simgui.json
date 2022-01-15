@@ -15,5 +15,12 @@
       "/LiveWindow/Manipulator": "Subsystem",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
     }
+  },
+  "NetworkTables": {
+    "Shuffleboard": {
+      "Teleop": {
+        "open": true
+      }
+    }
   }
 }
