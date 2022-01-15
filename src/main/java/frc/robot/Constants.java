@@ -34,6 +34,8 @@ public class Constants {
       public static final int deployPort = 2;
       public static final int inputPort = 3;
     public static final int deploySpeed = 1;
+    public static final double suckSpeed = 0.5;
+   public static final double blowSpeed = 1;
    }
 
    public static final class ClimbConstants{

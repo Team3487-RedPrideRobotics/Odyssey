@@ -75,6 +75,7 @@ manipulatorDeploy = new Spark(Constants.ManipulatorConstants.deployPort);
 
     public void deploySetSpeed(double speed){
         manipulatorDeploy.set(speed);
+        
     }
 
     public void inputSetSpeed(double speed){
