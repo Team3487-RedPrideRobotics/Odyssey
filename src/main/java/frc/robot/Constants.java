@@ -33,6 +33,13 @@ public class Constants {
 
       public static final int deployPort = 2;
       public static final int inputPort = 3;
+    public static final int deploySpeed = 1;
+   }
+
+   public static final class ClimbConstants{
+
+    public static final int slidingPort = 5;
+
    }
 }
 
