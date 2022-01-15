@@ -46,6 +46,9 @@ public class TeleopCommand extends CommandBase {
         private NetworkTableEntry leftInvertedChooser;
         private NetworkTableEntry rightInvertedChooser; 
         private NetworkTableEntry manipulatorSpeedEntry;
+        private NetworkTableEntry blowSpeedEntry;
+        private NetworkTableEntry suckSpeedEntry;
+
         private int leftInverted = 1;
         private int rightInverted = 1;
 
@@ -71,6 +74,8 @@ public class TeleopCommand extends CommandBase {
         deadzoneChooser = Shuffleboard.getTab("Teleop").add("Deadzone", Constants.DriveConstants.deadzone).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max",1.0,"Min",0)).getEntry();
 
         manipulatorSpeedEntry = Shuffleboard.getTab("Teleop").add("Deploy Speed", Constants.ManipulatorConstants.deploySpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min",0.0)).getEntry();
+        blowSpeedEntry = Shuffleboard.getTab("Teleop").add("Blow Speed", Constants.ManipulatorConstants.blowSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
+        suckSpeedEntry = Shuffleboard.getTab("Teleop").add("Suck Speed", Constants.ManipulatorConstants.suckSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", .50, "Min", 0.0)).getEntry();
 
         manipulator = m_manipulator;
         addRequirements(m_manipulator);
@@ -102,9 +107,9 @@ public class TeleopCommand extends CommandBase {
         double rightTrigger = RobotContainer.getInstance().getRightTrigger();
         double leftTrigger = RobotContainer.getInstance().getLeftTrigger();
         if(rightTrigger > leftTrigger){
-            manipulator.inputSetSpeed(rightTrigger * Constants.ManipulatorConstants.suckSpeed);
+            manipulator.inputSetSpeed(rightTrigger * suckSpeedEntry.getDouble(Constants.ManipulatorConstants.suckSpeed));
         } else {
-            manipulator.inputSetSpeed(-leftTrigger * Constants.ManipulatorConstants.blowSpeed);
+            manipulator.inputSetSpeed(leftTrigger * blowSpeedEntry.getDouble(-Constants.ManipulatorConstants.blowSpeed));
         }
         if(RobotContainer.getInstance().getLeftBumper()){
             manipulator.deploySetSpeed(manipulatorSpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
