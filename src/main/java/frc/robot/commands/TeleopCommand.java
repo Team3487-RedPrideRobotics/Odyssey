@@ -66,16 +66,16 @@ public class TeleopCommand extends CommandBase {
         m_drive = subsystem;
         addRequirements(m_drive);
 
-        driveSpeedEntry = Shuffleboard.getTab("Teleop").add("Drive Speed", Constants.DriveConstants.driveSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max",1.0,"Min",0.0)).getEntry();
+        driveSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Drive Speed", Constants.DriveConstants.driveSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max",1.0,"Min",0.0)).getEntry();
 
-        leftInvertedChooser = Shuffleboard.getTab("Teleop").add("Left Inverted", false).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
-        rightInvertedChooser = Shuffleboard.getTab("Teleop").add("Right Inverted", false).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
+        leftInvertedChooser = Shuffleboard.getTab("Teleop").addPersistent("Left Inverted", false).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
+        rightInvertedChooser = Shuffleboard.getTab("Teleop").addPersistent("Right Inverted", false).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
 
-        deadzoneChooser = Shuffleboard.getTab("Teleop").add("Deadzone", Constants.DriveConstants.deadzone).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max",1.0,"Min",0)).getEntry();
+        deadzoneChooser = Shuffleboard.getTab("Teleop").addPersistent("Deadzone", Constants.DriveConstants.deadzone).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max",1.0,"Min",0)).getEntry();
 
-        manipulatorSpeedEntry = Shuffleboard.getTab("Teleop").add("Deploy Speed", Constants.ManipulatorConstants.deploySpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min",0.0)).getEntry();
-        blowSpeedEntry = Shuffleboard.getTab("Teleop").add("Blow Speed", Constants.ManipulatorConstants.blowSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
-        suckSpeedEntry = Shuffleboard.getTab("Teleop").add("Suck Speed", Constants.ManipulatorConstants.suckSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", .50, "Min", 0.0)).getEntry();
+        manipulatorSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Deploy Speed", Constants.ManipulatorConstants.deploySpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min",0.0)).getEntry();
+        blowSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Blow Speed", Constants.ManipulatorConstants.blowSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
+        suckSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Suck Speed", Constants.ManipulatorConstants.suckSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", .50, "Min", 0.0)).getEntry();
 
         manipulator = m_manipulator;
         addRequirements(m_manipulator);

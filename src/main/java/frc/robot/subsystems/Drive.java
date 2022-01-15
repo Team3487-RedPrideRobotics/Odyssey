@@ -76,8 +76,8 @@ public NetworkTableEntry rightEncoderInvertedEntry;
         Shuffleboard.getTab("Drivetrain").add("Right Encoder", rightEncoder);
         Shuffleboard.getTab("Drivetrain").add("Left Encoder", leftEncoder);
 
-        leftEncoderInvertedEntry = Shuffleboard.getTab("Drivetrain").add("Left Encoder Inverted", Constants.DriveConstants.leftEncoderInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
-        rightEncoderInvertedEntry = Shuffleboard.getTab("Drivetrain").add("Right Encoder Inverted", Constants.DriveConstants.rightEncoderInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
+        leftEncoderInvertedEntry = Shuffleboard.getTab("Drivetrain").addPersistent("Left Encoder Inverted", Constants.DriveConstants.leftEncoderInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
+        rightEncoderInvertedEntry = Shuffleboard.getTab("Drivetrain").addPersistent("Right Encoder Inverted", Constants.DriveConstants.rightEncoderInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
 
         leftEncoderInvertedEntry.addListener(event ->{
             leftEncoder.setReverseDirection(leftEncoderInvertedEntry.getBoolean(Constants.DriveConstants.leftEncoderInverted));
