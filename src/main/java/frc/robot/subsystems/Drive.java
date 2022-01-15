@@ -55,9 +55,8 @@ private Encoder rightEncoder;
 
         rightMotor = new PWMSparkMax(Constants.DriveConstants.rightMotorPort);
         rightMotor.setInverted(Constants.DriveConstants.rightMotorInverted);
-
+        
         m_differentialDrive = new DifferentialDrive(leftMotor, rightMotor);
-        addChild("Differential Drive 1",m_differentialDrive);
         m_differentialDrive.setSafetyEnabled(true);
         m_differentialDrive.setExpiration(0.1);
         m_differentialDrive.setMaxOutput(1.0);
