@@ -31,17 +31,37 @@
             ],
             "content": {
               "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Drive",
-              "_title": "Drive",
+              "_source0": "network_table:///LiveWindow/Ungrouped",
+              "_title": "Ungrouped",
               "Layout/Label position": "BOTTOM",
               "_children": [
                 {
+                  "_type": "Encoder",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[1]",
+                  "_title": "Encoder[1]"
+                },
+                {
                   "_type": "Differential Drivebase",
-                  "_source0": "network_table:///LiveWindow/Drive/Differential Drive 1",
-                  "_title": "Differential Drive 1",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DifferentialDrive[1]",
+                  "_title": "DifferentialDrive[1]",
                   "Wheels/Number of wheels": 4,
                   "Wheels/Wheel diameter": 80.0,
                   "Visuals/Show velocity vectors": true
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[3]/Value",
+                  "_title": "Spark[3]/Value"
+                },
+                {
+                  "_type": "Encoder",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[0]",
+                  "_title": "Encoder[0]"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[2]/Value",
+                  "_title": "Spark[2]/Value"
                 }
               ]
             }
@@ -53,31 +73,10 @@
             ],
             "content": {
               "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Ungrouped",
-              "_title": "Ungrouped",
+              "_source0": "network_table:///LiveWindow/Manipulator",
+              "_title": "Manipulator",
               "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Encoder",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[1]",
-                  "_title": "Encoder[1]"
-                },
-                {
-                  "_type": "Encoder",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[0]",
-                  "_title": "Encoder[0]"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[2]/Value",
-                  "_title": "Spark[2]/Value"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[3]/Value",
-                  "_title": "Spark[3]/Value"
-                }
-              ]
+              "_children": []
             }
           },
           "4,0": {
@@ -87,8 +86,8 @@
             ],
             "content": {
               "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Example",
-              "_title": "Example",
+              "_source0": "network_table:///LiveWindow/Drive",
+              "_title": "Drive",
               "Layout/Label position": "BOTTOM",
               "_children": []
             }
@@ -100,8 +99,8 @@
             ],
             "content": {
               "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Manipulator",
-              "_title": "Manipulator",
+              "_source0": "network_table:///LiveWindow/Example",
+              "_title": "Example",
               "Layout/Label position": "BOTTOM",
               "_children": []
             }
@@ -113,7 +112,7 @@
   "windowGeometry": {
     "x": 0.0,
     "y": 0.0,
-    "width": 1536.0,
-    "height": 824.0
+    "width": 1920.0,
+    "height": 1040.0
   }
 }
