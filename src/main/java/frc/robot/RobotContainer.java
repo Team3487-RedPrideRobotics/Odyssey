@@ -76,8 +76,6 @@ private final JoystickButton rightBumper = new JoystickButton(xInput, XboxContro
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    leftBumper.whileHeld(new DeployCommand(m_manipulator, -Constants.ManipulatorConstants.deploySpeed));
-    rightBumper.whileHeld(new DeployCommand(m_manipulator, Constants.ManipulatorConstants.deploySpeed));
   }
 public double[] getYAxes() {
       double[] sticks = {xInput.getLeftY(),xInput.getRightY()};
@@ -109,6 +107,14 @@ public double[] getYAxes() {
   public double getLeftTrigger() {
     double leftTrigger = xInput.getLeftTriggerAxis();
     return leftTrigger;
+  }
+
+  public boolean getLeftBumper() {
+    return xInput.getLeftBumper();
+  }
+
+  public boolean getRightBumper() {
+    return xInput.getRightBumper();
   }
 }
 

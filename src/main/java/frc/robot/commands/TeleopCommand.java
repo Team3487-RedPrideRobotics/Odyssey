@@ -95,12 +95,20 @@ public class TeleopCommand extends CommandBase {
         }
         if(Math.abs(sticks[0]) > deadzoneChooser.getDouble(Constants.DriveConstants.deadzone) || Math.abs(sticks[1]) > deadzoneChooser.getDouble(Constants.DriveConstants.deadzone)){
             m_drive.tankDriveRaw(sticks[0]*Math.sqrt(driveSpeedEntry.getDouble(Constants.DriveConstants.driveSpeed))*leftInverted, sticks[1]*Math.sqrt(driveSpeedEntry.getDouble(Constants.DriveConstants.driveSpeed))*rightInverted);
+        }
         double rightTrigger = RobotContainer.getInstance().getRightTrigger();
         double leftTrigger = RobotContainer.getInstance().getLeftTrigger();
         if(rightTrigger > leftTrigger){
             manipulator.inputSetSpeed(rightTrigger * Constants.ManipulatorConstants.suckSpeed);
         } else {
             manipulator.inputSetSpeed(-leftTrigger * Constants.ManipulatorConstants.blowSpeed);
+        }
+        if(RobotContainer.getInstance().getLeftBumper()){
+            manipulator.deploySetSpeed(Constants.ManipulatorConstants.deploySpeed);
+        }else if(RobotContainer.getInstance().getRightBumper()){
+            manipulator.deploySetSpeed(-Constants.ManipulatorConstants.deploySpeed);
+        }else{
+            manipulator.deploySetSpeed(0);
         }
     }
 
