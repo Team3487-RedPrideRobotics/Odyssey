@@ -34,7 +34,8 @@
       "/LiveWindow/Example": "Subsystem",
       "/LiveWindow/Manipulator": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
-      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/Shuffleboard/Teleop/Control Scheme": "String Chooser"
     }
   },
   "NetworkTables": {
