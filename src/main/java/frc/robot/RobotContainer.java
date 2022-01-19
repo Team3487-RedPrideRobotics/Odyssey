@@ -62,8 +62,8 @@ private final XboxController xInput = new XboxController(0);
 private final XboxController fightStick = new XboxController(1);
 
 //joystick buttons
-private JoystickButton deployButton;
-private JoystickButton retractButton;
+private JoystickButton deployButton = new JoystickButton(xInput, XboxController.Button.kLeftBumper.value);
+private JoystickButton retractButton = new JoystickButton(xInput, XboxController.Button.kRightBumper.value);
 
 public static final String controlFightStick = "Xbox + FightStick";
 public static final String controlXbox = "Xbox";
@@ -95,6 +95,7 @@ private String currentScheme = controlXbox;
             checkControls();
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
     checkControls();
+    configureButtonBindings();
   }
 
   private void checkControls() {
