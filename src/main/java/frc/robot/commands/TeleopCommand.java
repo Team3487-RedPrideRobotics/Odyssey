@@ -109,12 +109,12 @@ public class TeleopCommand extends CommandBase {
         if(rightTrigger > leftTrigger){
             manipulator.inputSetSpeed(rightTrigger * suckSpeedEntry.getDouble(Constants.ManipulatorConstants.suckSpeed));
         } else {
-            manipulator.inputSetSpeed(leftTrigger * blowSpeedEntry.getDouble(-Constants.ManipulatorConstants.blowSpeed));
+            manipulator.inputSetSpeed(-leftTrigger * blowSpeedEntry.getDouble(Constants.ManipulatorConstants.blowSpeed));
         }
         if(RobotContainer.getInstance().getLeftBumper()){
             manipulator.deploySetSpeed(manipulatorSpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
         }else if(RobotContainer.getInstance().getRightBumper()){
-            manipulator.deploySetSpeed(manipulatorSpeedEntry.getDouble(-Constants.ManipulatorConstants.deploySpeed));
+            manipulator.deploySetSpeed(-manipulatorSpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
         }else{
             manipulator.deploySetSpeed(0);
         }
