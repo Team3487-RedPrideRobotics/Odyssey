@@ -7,4 +7,4 @@ double "/Shuffleboard/Teleop/Deploy Speed"=1
 double "/Shuffleboard/Teleop/Drive Speed"=1
 boolean "/Shuffleboard/Teleop/Left Inverted"=false
 boolean "/Shuffleboard/Teleop/Right Inverted"=false
-double "/Shuffleboard/Teleop/Suck Speed"=0.496951
+double "/Shuffleboard/Teleop/Suck Speed"=0.5
