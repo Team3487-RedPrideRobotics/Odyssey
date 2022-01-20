@@ -12,6 +12,7 @@
       "/LiveWindow/Drive": "Subsystem",
       "/LiveWindow/Drive/Differential Drive 1": "DifferentialDrive",
       "/LiveWindow/Example": "Subsystem",
+      "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
     }
   }
