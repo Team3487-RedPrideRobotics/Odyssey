@@ -50,8 +50,9 @@ public class Constants {
    public static final class ClimbConstants{
 
     public static final int slidingPort = 5;
-    public static int movingHook;
-    public static int elevatedHook;
+    public static final int leftLSPort = 0;
+    public static final int rightLSPort = 0;
+    public static int elevatedHook = 6;
 
    }
 }
