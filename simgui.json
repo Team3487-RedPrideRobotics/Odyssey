@@ -52,13 +52,5 @@
         "open": true
       }
     }
-  },
-  "NetworkTables": {
-    "LiveWindow": {
-      "open": true
-    },
-    "Shuffleboard": {
-      "open": true
-    }
   }
 }

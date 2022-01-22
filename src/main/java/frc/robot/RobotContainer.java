@@ -48,7 +48,7 @@ public class RobotContainer {
     public final Example m_example = new Example();
     public final Drive m_drive = new Drive();
     public final Manipulator m_manipulator = new Manipulator();
-
+    public final Climbing m_climb = new Climbing();
 // Joysticks
 
   
@@ -74,8 +74,9 @@ private JoystickButton blowButton = new JoystickButton(fightStick, 4);
 private String currentScheme = controlXbox;
 
 
+
     //commands
-    private final TeleopCommand m_teleopCommand = new TeleopCommand(m_drive, m_manipulator);
+    private final TeleopCommand m_teleopCommand = new TeleopCommand(m_drive, m_manipulator, m_climb);
 
     private SendableChooser<String> controlScheme;
 
@@ -186,6 +187,14 @@ public double[] getYAxes() {
 
   public boolean getRightBumper() {
     return retractButton.get();
+  }
+
+  public int getDPad(){
+    if(controlScheme.getSelected() == controlXbox){
+      return xInput.getPOV();
+    }else{
+      return fightStick.getPOV();
+    }
   }
 }
 
