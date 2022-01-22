@@ -148,7 +148,7 @@ public double[] getYAxes() {
   */
   public Command getAutonomousCommand() {
     // The selected command will be run in autonomous
-    return m_templateCommand;
+    return m_templateCommand.andThen(new TurnCommand(m_drive, 90, 0.75));
   }
 
   public Command getTeleopCommand(){
