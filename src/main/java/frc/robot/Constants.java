@@ -53,6 +53,7 @@ public class Constants {
     public static final int leftLSPort = 4;
     public static final int rightLSPort = 5;
     public static int elevatedHook = 6;
+    public static int movingHook = 1;
 
    }
 }

@@ -36,12 +36,15 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Climbing": "Subsystem",
       "/LiveWindow/Drive": "Subsystem",
       "/LiveWindow/Drive/Differential Drive 1": "DifferentialDrive",
       "/LiveWindow/Example": "Subsystem",
       "/LiveWindow/Manipulator": "Subsystem",
       "/LiveWindow/Ungrouped/ADXRS450_Gyro[0]": "Gyro",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/DigitalInput[4]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[5]": "Digital Input",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/Shuffleboard/Teleop/Control Scheme": "String Chooser"
     }
