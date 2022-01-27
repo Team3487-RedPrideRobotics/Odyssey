@@ -84,7 +84,7 @@ public class TeleopCommand extends CommandBase {
 
         
         elevatedHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Elevated Hook Speed", Constants.ClimbConstants.elevatedHook).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
-        movingHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Moving Hook Speed", Constants.ClimbConstants.movingHook).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Min",0.0,"Max",1.0)).getEntry();
+        movingHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Moving Hook Speed", Constants.ClimbConstants.movingHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Min",0.0,"Max",1.0)).getEntry();
         manipulator = m_manipulator;
         addRequirements(m_manipulator);
 
@@ -129,8 +129,8 @@ public class TeleopCommand extends CommandBase {
         }else{
             manipulator.deploySetSpeed(0);
         }
-        climb.setHookSpeed(dPadDirection[1]*elevatedHookEntry.getDouble(Constants.ClimbConstants.movingHook));
-        climb.setSlidingSpeed(dPadDirection[0]*movingHookEntry.getDouble(Constants.ClimbConstants.movingHook));
+        climb.setHookSpeed(dPadDirection[1]*elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
+        climb.setSlidingSpeed(dPadDirection[0]*movingHookEntry.getDouble(Constants.ClimbConstants.movingHookSpeed));
     }
 
     // Called once the command ends or is interrupted.
