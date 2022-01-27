@@ -50,6 +50,8 @@ public class TeleopCommand extends CommandBase {
         private NetworkTableEntry manipulatorSpeedEntry;
         private NetworkTableEntry blowSpeedEntry;
         private NetworkTableEntry suckSpeedEntry;
+        private NetworkTableEntry movingHookEntry;
+        private NetworkTableEntry elevatedHookEntry;
 
         private int leftInverted = 1;
         private int rightInverted = 1;
@@ -80,6 +82,9 @@ public class TeleopCommand extends CommandBase {
         blowSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Blow Speed", Constants.ManipulatorConstants.blowSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         suckSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Suck Speed", Constants.ManipulatorConstants.suckSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", .50, "Min", 0.0)).getEntry();
 
+        
+        elevatedHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Elevated Hook Speed", Constants.ClimbConstants.elevatedHook).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
+        movingHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Moving Hook Speed", Constants.ClimbConstants.movingHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Min",0.0,"Max",1.0)).getEntry();
         manipulator = m_manipulator;
         addRequirements(m_manipulator);
 
@@ -124,8 +129,8 @@ public class TeleopCommand extends CommandBase {
         }else{
             manipulator.deploySetSpeed(0);
         }
-        climb.setHookSpeed(dPadDirection[1]);
-        climb.setSlidingSpeed(dPadDirection[0]);
+        climb.setHookSpeed(dPadDirection[1]*elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
+        climb.setSlidingSpeed(dPadDirection[0]*movingHookEntry.getDouble(Constants.ClimbConstants.movingHookSpeed));
     }
 
     // Called once the command ends or is interrupted.

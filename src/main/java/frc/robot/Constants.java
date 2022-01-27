@@ -32,7 +32,7 @@ public class Constants {
     public static final int rightEncoder1 = 2;
     public static final int rightEncoder2 = 3;
     public static final boolean rightEncoderInverted = false;
-    public static final double distancePerPulse = 360*Math.PI*0.5; // in feet
+    public static final double distancePerPulse = Math.PI*0.5/360; // in feet
     public static final double driveSpeed = 1;
    public static final double deadzone = 0.2;
 
@@ -54,7 +54,11 @@ public class Constants {
     public static final int slidingPort = 5;
     public static final int leftLSPort = 4;
     public static final int rightLSPort = 5;
-    public static int elevatedHook = 6;
+    public static final int elevatedHook = 6;
+   public static final boolean elevatedHookInverted = false;
+public static final boolean slidingHookInverted = false;
+public static final double elevatedHookSpeed = 1;
+public static final double movingHookSpeed = 1;
 
    }
 }
