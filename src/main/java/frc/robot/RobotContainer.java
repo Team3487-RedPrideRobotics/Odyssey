@@ -53,7 +53,6 @@ public class RobotContainer {
 
   
 // commands
-  private final Template m_autoCommand = new Template(m_drive);
 
   /**
   * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -76,7 +75,6 @@ private String currentScheme = controlXbox;
 
     //commands
     private final TeleopCommand m_teleopCommand = new TeleopCommand(m_drive, m_manipulator);
-    private final Template m_templateCommand = new Template(m_drive);
 
     private SendableChooser<String> controlScheme;
 
@@ -148,7 +146,7 @@ public double[] getYAxes() {
   */
   public Command getAutonomousCommand() {
     // The selected command will be run in autonomous
-    return m_templateCommand.andThen(new TurnCommand(m_drive, 90, 0.75));
+    return new DriveStraightCommand(1d, 0.5, m_drive).andThen(new TurnCommand(m_drive, 90, 0.5)).andThen(new DriveStraightCommand(1d, 0.5, m_drive)).andThen(new TurnCommand(m_drive, 180, 0.5));
   }
 
   public Command getTeleopCommand(){

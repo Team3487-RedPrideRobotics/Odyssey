@@ -58,7 +58,7 @@ public class TurnCommand extends CommandBase {
                 finished = true;
                 drive.tankDriveRaw(0, 0);
             }else{
-                drive.tankDriveRaw(speed, -speed);
+                drive.tankDriveRaw(-speed, -speed);
             }
         }else{
             if(angle < 0){
@@ -66,7 +66,7 @@ public class TurnCommand extends CommandBase {
                     finished = true;
                     drive.tankDriveRaw(0, 0);
                 }else{
-                    drive.tankDriveRaw(-speed, speed);
+                    drive.tankDriveRaw(speed, speed);
                 }
             }else{
                 drive.tankDriveRaw(0, 0);
