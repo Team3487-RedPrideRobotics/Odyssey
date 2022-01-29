@@ -28,10 +28,10 @@ public class Constants {
     public static final int rightMotorPort = 1;
     public static final int leftEncoder1 = 0;
     public static final int leftEncoder2 = 1;
-    public static final boolean leftEncoderInverted = false;
+    public static final boolean leftEncoderInverted = true;
     public static final int rightEncoder1 = 2;
     public static final int rightEncoder2 = 3;
-    public static final boolean rightEncoderInverted = false;
+    public static final boolean rightEncoderInverted = true;
     public static final double distancePerPulse = Math.PI*0.5/360; // in feet
     public static final double driveSpeed = 1;
    public static final double deadzone = 0.2;

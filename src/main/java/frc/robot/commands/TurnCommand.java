@@ -51,22 +51,21 @@ public class TurnCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        debug = drive.getHeading();
-        System.out.println(debug);
+        System.out.println(drive.getHeading());
         if(angle > 0){
             if(drive.getHeading() >= angle){
                 finished = true;
                 drive.tankDriveRaw(0, 0);
             }else{
-                drive.tankDriveRaw(-speed, -speed);
+                drive.tankDriveRaw(speed, speed);
             }
         }else{
             if(angle < 0){
-                if(drive.getHeading() <= angle){
+                if(drive.getHeading() >= angle){
                     finished = true;
                     drive.tankDriveRaw(0, 0);
                 }else{
-                    drive.tankDriveRaw(speed, speed);
+                    drive.tankDriveRaw(-speed, -speed);
                 }
             }else{
                 drive.tankDriveRaw(0, 0);
@@ -78,6 +77,7 @@ public class TurnCommand extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         drive.tankDriveRaw(0, 0);
+        finished = false;
     }
 
     // Returns true when the command should end.

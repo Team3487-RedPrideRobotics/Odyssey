@@ -21,8 +21,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -79,18 +81,21 @@ private Gyro gyroscope;
         Shuffleboard.getTab("Drivetrain").add("Right Encoder", rightEncoder);
         Shuffleboard.getTab("Drivetrain").add("Left Encoder", leftEncoder);
 
-        leftEncoderInvertedEntry = Shuffleboard.getTab("Drivetrain").addPersistent("Left Encoder Inverted", Constants.DriveConstants.leftEncoderInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
-        rightEncoderInvertedEntry = Shuffleboard.getTab("Drivetrain").addPersistent("Right Encoder Inverted", Constants.DriveConstants.rightEncoderInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
+        //leftEncoderInvertedEntry = Shuffleboard.getTab("Drivetrain").addPersistent("Left Encoder Inverted", Constants.DriveConstants.leftEncoderInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
+        //rightEncoderInvertedEntry = Shuffleboard.getTab("Drivetrain").addPersistent("Right Encoder Inverted", Constants.DriveConstants.rightEncoderInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
 
-        leftEncoderInvertedEntry.addListener(event ->{
-            leftEncoder.setReverseDirection(leftEncoderInvertedEntry.getBoolean(Constants.DriveConstants.leftEncoderInverted));
-        }, EntryListenerFlags.kNew | EntryListenerFlags.kImmediate | EntryListenerFlags.kUpdate | EntryListenerFlags.kLocal);
-        rightEncoderInvertedEntry.addListener(event ->{
-            rightEncoder.setReverseDirection(leftEncoderInvertedEntry.getBoolean(Constants.DriveConstants.rightEncoderInverted));
-        }, EntryListenerFlags.kNew | EntryListenerFlags.kImmediate | EntryListenerFlags.kUpdate | EntryListenerFlags.kLocal);
+        //leftEncoderInvertedEntry.addListener(event ->{
+        //    leftEncoder.setReverseDirection(leftEncoderInvertedEntry.getBoolean(Constants.DriveConstants.leftEncoderInverted));
+        //}, EntryListenerFlags.kNew | EntryListenerFlags.kImmediate | EntryListenerFlags.kUpdate | EntryListenerFlags.kLocal);
+        //rightEncoderInvertedEntry.addListener(event ->{
+        //    rightEncoder.setReverseDirection(leftEncoderInvertedEntry.getBoolean(Constants.DriveConstants.rightEncoderInverted));
+        //}, EntryListenerFlags.kNew | EntryListenerFlags.kImmediate | EntryListenerFlags.kUpdate | EntryListenerFlags.kLocal);
 
         gyroscope = new ADXRS450_Gyro();
+        gyroscope.calibrate();
         gyroscope.reset();
+        Shuffleboard.getTab("Drivetrain").add((Sendable) gyroscope);
+        resetEncoders();
         
     }
 
@@ -124,7 +129,7 @@ private Gyro gyroscope;
     }
 
     public double getHeading(){
-        return gyroscope.getRotation2d().getDegrees();
+        return gyroscope.getAngle()%360;
     }
 
     public void resetGyro(){

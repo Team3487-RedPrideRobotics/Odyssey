@@ -61,11 +61,11 @@ public class DriveStraightCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if(m_drive.getEncoderDistance()[0] <= distanace /* in feet*/){
+        if(m_drive.getEncoderDistance()[0] >= distanace /* in feet*/){
             m_drive.tankDriveRaw(0, 0);
             finished = true;
         }else{
-            m_drive.tankDriveRaw(-speed,speed);
+            m_drive.tankDriveRaw(speed,-speed);
         }
         
     }
