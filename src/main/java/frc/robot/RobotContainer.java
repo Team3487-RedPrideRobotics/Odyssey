@@ -53,7 +53,6 @@ public class RobotContainer {
 
   
 // commands
-  private final AutoCommand m_autoCommand = new AutoCommand(m_drive);
 
   /**
   * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -148,7 +147,7 @@ public double[] getYAxes() {
   */
   public Command getAutonomousCommand() {
     // The selected command will be run in autonomous
-    return new WaitCommand(1);
+    return new DriveStraightCommand(1d, 0.5, m_drive).andThen(new TurnCommand(m_drive, 90, 0.5)).andThen(new DriveStraightCommand(1d, 0.5, m_drive)).andThen(new TurnCommand(m_drive, 180, 0.5));
   }
 
   public Command getTeleopCommand(){
