@@ -83,7 +83,7 @@ public class TeleopCommand extends CommandBase {
         suckSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Suck Speed", Constants.ManipulatorConstants.suckSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", .50, "Min", 0.0)).getEntry();
 
         
-        elevatedHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Elevated Hook Speed", Constants.ClimbConstants.elevatedHook).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
+        elevatedHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Elevated Hook Speed", Constants.ClimbConstants.elevatedHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         movingHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Moving Hook Speed", Constants.ClimbConstants.movingHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Min",0.0,"Max",1.0)).getEntry();
         manipulator = m_manipulator;
         addRequirements(m_manipulator);
@@ -100,37 +100,7 @@ public class TeleopCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        double[] sticks = RobotContainer.getInstance().getYAxes();
-        int[] dPadDirection = DPadParser.Parse(RobotContainer.getInstance().getDPad());
-        if(leftInvertedChooser.getBoolean(false)){
-            leftInverted = -1;
-        }else{
-            leftInverted = 1;
-        }
-        if(rightInvertedChooser.getBoolean(false)){
-            rightInverted = -1;
-        }else{
-            rightInverted = 1;
-        }
-        if(Math.abs(sticks[0]) > deadzoneChooser.getDouble(Constants.DriveConstants.deadzone) || Math.abs(sticks[1]) > deadzoneChooser.getDouble(Constants.DriveConstants.deadzone)){
-            m_drive.tankDriveRaw(sticks[0]*Math.sqrt(driveSpeedEntry.getDouble(Constants.DriveConstants.driveSpeed))*leftInverted, sticks[1]*Math.sqrt(driveSpeedEntry.getDouble(Constants.DriveConstants.driveSpeed))*rightInverted);
-        }
-        double rightTrigger = RobotContainer.getInstance().getRightTrigger();
-        double leftTrigger = RobotContainer.getInstance().getLeftTrigger();
-        if(rightTrigger > leftTrigger){
-            manipulator.inputSetSpeed(rightTrigger * suckSpeedEntry.getDouble(Constants.ManipulatorConstants.suckSpeed));
-        } else {
-            manipulator.inputSetSpeed(-leftTrigger * blowSpeedEntry.getDouble(Constants.ManipulatorConstants.blowSpeed));
-        }
-        if(RobotContainer.getInstance().getLeftBumper()){
-            manipulator.deploySetSpeed(manipulatorSpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
-        }else if(RobotContainer.getInstance().getRightBumper()){
-            manipulator.deploySetSpeed(-manipulatorSpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
-        }else{
-            manipulator.deploySetSpeed(0);
-        }
-        climb.setHookSpeed(dPadDirection[1]*elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
-        climb.setSlidingSpeed(dPadDirection[0]*movingHookEntry.getDouble(Constants.ClimbConstants.movingHookSpeed));
+        
     }
 
     // Called once the command ends or is interrupted.

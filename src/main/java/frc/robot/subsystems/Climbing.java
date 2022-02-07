@@ -55,7 +55,8 @@ public class Climbing extends SubsystemBase {
         middleHookEntry = Shuffleboard.getTab("Climber").add("Invert Sliding Hook",Constants.ClimbConstants.slidingHookInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
 
         elevatedHookEntry.addListener(event ->{
-            elevatedHooks.setInverted(elevatedHookEntry.getBoolean(Constants.ClimbConstants.elevatedHookInverted));
+            leftHook.setInverted(elevatedHookEntry.getBoolean(Constants.ClimbConstants.elevatedHookInverted));
+            rightHook.setInverted(elevatedHookEntry.getBoolean(Constants.ClimbConstants.elevatedHookInverted));
         }, EntryListenerFlags.kNew | EntryListenerFlags.kImmediate | EntryListenerFlags.kUpdate | EntryListenerFlags.kLocal);
 
         middleHookEntry.addListener(event ->{
