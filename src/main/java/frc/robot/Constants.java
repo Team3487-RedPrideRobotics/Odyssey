@@ -42,6 +42,7 @@ public class Constants {
 
       public static final int deployPort = 2;
       public static final int inputPort = 3;
+      public static final int revPort = 4;
     public static final int deploySpeed = 1;
     public static final double suckSpeed = 0.5;
    public static final double blowSpeed = 1;
@@ -52,7 +53,8 @@ public class Constants {
     public static final int slidingPort = 5;
     public static final int leftLSPort = 0;
     public static final int rightLSPort = 0;
-    public static int elevatedHook = 6;
+    public static int leftHook= 6;
+    public static int rightHook = 7;
 
    }
 }
