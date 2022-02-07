@@ -34,7 +34,7 @@ public class Constants {
     public static final boolean rightEncoderInverted = true;
     public static final double distancePerPulse = Math.PI*0.5/360; // in feet
     public static final double driveSpeed = 1;
-   public static final double deadzone = 0.2;
+   public static final double deadzone = 0.1;
 
 
    }
@@ -48,6 +48,9 @@ public class Constants {
       public static final boolean inputInverted = false;
       public static final boolean deployInverted = false;
       public static final int revPort = 4;
+    public static final double revDeadzone = 0.1;
+    public static double revSpeed = 1;
+   public static double deployDeadzone = 1;
    }
 
    public static final class ClimbConstants{
