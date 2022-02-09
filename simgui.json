@@ -46,6 +46,13 @@
       "/LiveWindow/Ungrouped/DigitalInput[4]": "Digital Input",
       "/LiveWindow/Ungrouped/DigitalInput[5]": "Digital Input",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/Spark[2]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Spark[3]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Spark[4]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Spark[5]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Spark[6]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Spark[7]": "Motor Controller",
+      "/Shuffleboard/Drivetrain/ADXRS450_Gyro[0]": "Gyro",
       "/Shuffleboard/Teleop/Control Scheme": "String Chooser"
     }
   },

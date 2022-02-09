@@ -34,7 +34,7 @@ public class Constants {
     public static final boolean rightEncoderInverted = true;
     public static final double distancePerPulse = Math.PI*0.5/360; // in feet
     public static final double driveSpeed = 1;
-   public static final double deadzone = 0.2;
+   public static final double deadzone = 0.1;
 
 
    }
@@ -47,6 +47,10 @@ public class Constants {
       public static final double blowSpeed = 1;
       public static final boolean inputInverted = false;
       public static final boolean deployInverted = false;
+      public static final int revPort = 4;
+    public static final double revDeadzone = 0.1;
+    public static double revSpeed = 1;
+   public static double deployDeadzone = 1;
    }
 
    public static final class ClimbConstants{
@@ -54,11 +58,12 @@ public class Constants {
     public static final int slidingPort = 5;
     public static final int leftLSPort = 4;
     public static final int rightLSPort = 5;
-    public static final int elevatedHook = 6;
    public static final boolean elevatedHookInverted = false;
-public static final boolean slidingHookInverted = false;
-public static final double elevatedHookSpeed = 1;
+	public static final boolean slidingHookInverted = false;
+	public static final double elevatedHookSpeed = 1;
 public static final double movingHookSpeed = 1;
+    public static int leftHook= 6;
+    public static int rightHook = 7;
 
    }
 }
