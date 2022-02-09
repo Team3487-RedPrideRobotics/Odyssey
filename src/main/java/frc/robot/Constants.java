@@ -11,6 +11,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalSource;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -69,5 +71,8 @@ public static final double middleHookDeadzone = 0.1;
     public static int rightHook = 7;
 
    }
+
+public static final int[] deployEncoderPorts = {10,11};
+public static final int[] revEncoderPorts = {14,15};
 }
 
