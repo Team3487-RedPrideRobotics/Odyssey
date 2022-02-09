@@ -1,5 +1,5 @@
 [NetworkTables Storage 3.0]
-boolean "/Shuffleboard/Drivetrain/Left Encoder Inverted"=true
+boolean "/Shuffleboard/Drivetrain/Left Encoder Inverted"=false
 boolean "/Shuffleboard/Drivetrain/Right Encoder Inverted"=false
 double "/Shuffleboard/Teleop/Blow Speed"=1
 double "/Shuffleboard/Teleop/Deadzone"=0.083799
@@ -7,6 +7,10 @@ double "/Shuffleboard/Teleop/Deploy Speed"=1
 double "/Shuffleboard/Teleop/Drive Speed"=1
 double "/Shuffleboard/Teleop/Elevated Hook Speed"=1
 boolean "/Shuffleboard/Teleop/Left Inverted"=false
-double "/Shuffleboard/Teleop/Moving Hook Speed"=0.542735
+double "/Shuffleboard/Teleop/Middle Hook Deadzone"=0.1
+double "/Shuffleboard/Teleop/Moving Hook Speed"=1
+double "/Shuffleboard/Teleop/Rev Intake Speed"=0.5
+double "/Shuffleboard/Teleop/Rev Outtake Speed"=1
+double "/Shuffleboard/Teleop/Rev Speed"=1
 boolean "/Shuffleboard/Teleop/Right Inverted"=false
 double "/Shuffleboard/Teleop/Suck Speed"=0.5

@@ -60,9 +60,11 @@ public class TeleopCommand extends CommandBase {
         private NetworkTableEntry deadzoneChooser;
         private Climbing climb;
         private NetworkTableEntry revDeadRedemption;
-        private NetworkTableEntry revSpeedEntry;
+        private NetworkTableEntry revOuttakeSpeedEntry;
         private NetworkTableEntry deploySpeedEntry;
         private NetworkTableEntry deployDeadzone;
+        private NetworkTableEntry slidingHookDeadzone;
+        private NetworkTableEntry revIntakeSpeedEntry;
 
     public TeleopCommand(Drive subsystem, Manipulator m_manipulator, Climbing m_climb) {
 
@@ -82,13 +84,12 @@ public class TeleopCommand extends CommandBase {
         rightInvertedChooser = Shuffleboard.getTab("Teleop").addPersistent("Right Inverted", false).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
 
         deadzoneChooser = Shuffleboard.getTab("Teleop").addPersistent("Deadzone", Constants.DriveConstants.deadzone).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max",1.0,"Min",0)).getEntry();
-        revDeadRedemption = Shuffleboard.getTab("Teleop").addPersistent("Rev Deadzone", Constants.ManipulatorConstants.revDeadzone).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max",1.0,"Min",0)).getEntry();
-        deployDeadzone = Shuffleboard.getTab("Teleop").addPersistent("Deploy Deadzone", Constants.ManipulatorConstants.deployDeadzone).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max",1.0,"Min",0)).getEntry();
+        slidingHookDeadzone = Shuffleboard.getTab("Teleop").addPersistent("Middle Hook Deadzone", Constants.ClimbConstants.middleHookDeadzone).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max",1.0,"Min",0)).getEntry();
 
-        manipulatorSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Deploy Speed", Constants.ManipulatorConstants.deploySpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min",0.0)).getEntry();
         blowSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Blow Speed", Constants.ManipulatorConstants.blowSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         suckSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Suck Speed", Constants.ManipulatorConstants.suckSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", .50, "Min", 0.0)).getEntry();
-        revSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Rev Speed", Constants.ManipulatorConstants.revSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
+        revOuttakeSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Rev Outtake Speed", Constants.ManipulatorConstants.revOuttakeSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
+        revIntakeSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Rev Intake Speed", Constants.ManipulatorConstants.revIntakeSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 0.5, "Min", 0.0)).getEntry(); 
         deploySpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Deploy Speed", Constants.ManipulatorConstants.deploySpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         elevatedHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Elevated Hook Speed", Constants.ClimbConstants.elevatedHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         movingHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Moving Hook Speed", Constants.ClimbConstants.movingHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Min",0.0,"Max",1.0)).getEntry();
@@ -126,41 +127,44 @@ public class TeleopCommand extends CommandBase {
         }
         //intake
         //  intake/outtake
-        double revInput = RobotContainer.getInstance().getIntakeRev();
-        double deployInput = RobotContainer.getInstance().getIntakeDeploy();
-        boolean suckInput = RobotContainer.getInstance().getSuckButton();
-        boolean blowInput = RobotContainer.getInstance().getBlowButton();
+        boolean revForward = RobotContainer.getInstance().getIntakeRevForwards();
+        boolean revBackward = RobotContainer.getInstance().getIntakeRevBackwards();
+        boolean deployIntake = RobotContainer.getInstance().getIntakeDeploy();
+        boolean retractIntake = RobotContainer.getInstance().getIntakeRetract();
+        double suckInput = RobotContainer.getInstance().getSuck();
+        double blowInput = RobotContainer.getInstance().getBlow();
 
-        if(suckInput){
-            manipulator.inputSetSpeed(suckSpeedEntry.getDouble(Constants.ManipulatorConstants.suckSpeed));
-        }else if(blowInput){
-            manipulator.inputSetSpeed(-blowSpeedEntry.getDouble(Constants.ManipulatorConstants.blowSpeed));
+        if(suckInput > blowInput){
+            manipulator.inputSetSpeed(suckInput * suckSpeedEntry.getDouble(Constants.ManipulatorConstants.suckSpeed));
         }else{
-            manipulator.inputSetSpeed(0);
+            manipulator.inputSetSpeed(-blowInput * blowSpeedEntry.getDouble(Constants.ManipulatorConstants.blowSpeed));
         }
 
         // rev
-        if(Math.abs(revInput) > revDeadRedemption.getDouble(Constants.ManipulatorConstants.revDeadzone)){
-            manipulator.revSetSpeed(revInput*revSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+        if(revForward){
+            manipulator.revSetSpeed(revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+        }else if(revBackward){
+            manipulator.revSetSpeed(-revIntakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
         }else{
             manipulator.revSetSpeed(0);
         }
 
         // deploy/retract
-        if(Math.abs(deployInput) > deployDeadzone.getDouble(Constants.ManipulatorConstants.deployDeadzone)){
-            manipulator.deploySetSpeed(deployInput*deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
+        if(deployIntake){
+            manipulator.deploySetSpeed(deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
+        }else if(retractIntake){
+            manipulator.deploySetSpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
         }else{
             manipulator.deploySetSpeed(0);
         }
 
         // climbing
-        double climbBack = RobotContainer.getInstance().getClimbBackwards();
-        double rightClimbDown = RobotContainer.getInstance().getClimbDown();
+        double middleClimb = RobotContainer.getInstance().getClimbForward();
         // middle hook
-        if(RobotContainer.getInstance().getClimbForwardButton()){
-            climb.setSlidingSpeed(movingHookEntry.getDouble(Constants.ClimbConstants.movingHookSpeed));
-        } else{
-            climb.setSlidingSpeed(-climbBack*movingHookEntry.getDouble(Constants.ClimbConstants.movingHookSpeed));
+        if(Math.abs(middleClimb) > slidingHookDeadzone.getDouble(Constants.ClimbConstants.middleHookDeadzone)){
+            climb.setSlidingSpeed(middleClimb * movingHookEntry.getDouble(Constants.ClimbConstants.movingHookSpeed));
+        }else{
+            climb.setSlidingSpeed(0);
         }
 
         // left climber
@@ -175,8 +179,10 @@ public class TeleopCommand extends CommandBase {
         // right climber
         if(RobotContainer.getInstance().getRightClimbUpButton()){
             climb.setRightHookSpeed(elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
+        }else if(RobotContainer.getInstance().getRightClimbDownButton()){
+            climb.setRightHookSpeed(-movingHookEntry.getDouble(Constants.ClimbConstants.movingHookSpeed));
         }else{
-            climb.setRightHookSpeed(-rightClimbDown*movingHookEntry.getDouble(Constants.ClimbConstants.movingHookSpeed));
+            climb.setRightHookSpeed(0);
         }
 
     }

@@ -49,8 +49,10 @@ public class Constants {
       public static final boolean deployInverted = false;
       public static final int revPort = 4;
     public static final double revDeadzone = 0.1;
+    public static final double revOuttakeSpeed = 1;
     public static double revSpeed = 1;
    public static double deployDeadzone = 1;
+public static double revIntakeSpeed = 0.5;
    }
 
    public static final class ClimbConstants{
@@ -62,6 +64,7 @@ public class Constants {
 	public static final boolean slidingHookInverted = false;
 	public static final double elevatedHookSpeed = 1;
 public static final double movingHookSpeed = 1;
+public static final double middleHookDeadzone = 0.1;
     public static int leftHook= 6;
     public static int rightHook = 7;
 

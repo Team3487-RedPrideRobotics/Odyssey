@@ -58,8 +58,7 @@ public class RobotContainer {
   * The container for the robot.  Contains subsystems, OI devices, and commands.
   */
 private final XboxController xInput = new XboxController(0);
-private final XboxController fightStick = new XboxController(1);
-private final Joystick intakeStick = new Joystick(2);
+private final Joystick climbStick = new Joystick(1);
 
 // control layout:
 //  XBOX CONTROLLER:
@@ -75,12 +74,12 @@ private final Joystick intakeStick = new Joystick(2);
 //    BUTTON 1 (trigger): intake ball
 //    BUTTON 2 (side thumb button): shoot ball
 //joystick buttons
-private JoystickButton climbForwardButton = new JoystickButton(fightStick, XboxController.Button.kLeftBumper.value);
-private JoystickButton leftClimbUpButton = new JoystickButton(fightStick, XboxController.Button.kY.value);
-private JoystickButton leftClimbDownButton = new JoystickButton(fightStick, XboxController.Button.kB.value);
-private JoystickButton rightClimbUpButton = new JoystickButton(fightStick, XboxController.Button.kRightBumper.value);
-private JoystickButton suckButton = new JoystickButton(intakeStick, 0);
-private JoystickButton blowButton = new JoystickButton(intakeStick, 1);
+private JoystickButton leftClimbUpButton = new JoystickButton(climbStick, 10);
+private JoystickButton leftClimbDownButton = new JoystickButton(climbStick, 9);
+private JoystickButton rightClimbDownButton = new JoystickButton(climbStick, 11);
+private JoystickButton rightClimbUpButton = new JoystickButton(climbStick, 12);
+private JoystickButton deployButton = new JoystickButton(xInput, XboxController.Button.kRightBumper.value);
+private JoystickButton retractButton = new JoystickButton(xInput, XboxController.Button.kLeftBumper.value);
 
     //commands
     private final TeleopCommand m_teleopCommand = new TeleopCommand(m_drive, m_manipulator, m_climb);
@@ -90,8 +89,8 @@ private JoystickButton blowButton = new JoystickButton(intakeStick, 1);
   }
 
 
-  public boolean getClimbForwardButton() {
-    return climbForwardButton.get();
+  public double getClimbForward() {
+    return climbStick.getY();
   }
 
 
@@ -115,18 +114,21 @@ private JoystickButton blowButton = new JoystickButton(intakeStick, 1);
     return rightClimbUpButton.get();
   }
 
+  public boolean getRightClimbDownButton(){
+    return rightClimbDownButton.get();
+  }
 
 
 
-  public boolean getSuckButton() {
-    return suckButton.get();
+  public double getSuck() {
+    return xInput.getRightTriggerAxis();
   }
 
 
 
 
-  public boolean getBlowButton() {
-    return blowButton.get();
+  public double getBlow() {
+    return xInput.getLeftTriggerAxis();
   }
 
 
@@ -149,20 +151,20 @@ public double[] getYAxes() {
       return sticks;
     }
 
-public double getClimbBackwards(){
-  return fightStick.getLeftTriggerAxis();
+public boolean getIntakeDeploy(){
+  return xInput.getYButton();
 }
 
-public double getClimbDown(){
-  return fightStick.getRightTriggerAxis();
+public boolean getIntakeRetract(){
+  return xInput.getAButton();
 }
 
-public double getIntakeDeploy(){
-  return intakeStick.getThrottle();
+public boolean getIntakeRevForwards(){
+  return xInput.getLeftBumper();
 }
 
-public double getIntakeRev(){
-  return intakeStick.getY();
+public boolean getIntakeRevBackwards(){
+  return xInput.getRightBumper();
 }
 
 
