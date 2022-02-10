@@ -74,5 +74,8 @@ public static final double middleHookDeadzone = 0.1;
 
 public static final int[] deployEncoderPorts = {10,11};
 public static final int[] revEncoderPorts = {14,15};
+public static final class LightConstants{
+   public static final int blinkinPort = 9;
+};
 }
 
