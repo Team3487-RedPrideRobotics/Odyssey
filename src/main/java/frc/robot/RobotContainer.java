@@ -49,6 +49,7 @@ public class RobotContainer {
     public final Drive m_drive = new Drive();
     public final Manipulator m_manipulator = new Manipulator();
     public final Climbing m_climb = new Climbing();
+    public final Lights m_ligts = new Lights();
 // Joysticks
 
   
@@ -83,6 +84,7 @@ private JoystickButton retractButton = new JoystickButton(xInput, XboxController
 
     //commands
     private final TeleopCommand m_teleopCommand = new TeleopCommand(m_drive, m_manipulator, m_climb);
+    private final IdleCommand m_idleCommand = new IdleCommand(m_ligts);
 
   private RobotContainer() {
     configureButtonBindings();
@@ -182,6 +184,10 @@ public boolean getIntakeRevBackwards(){
 
   public Command getTeleopCommand(){
     return m_teleopCommand;
+  }
+
+  public Command getIdleCommand(){
+    return m_idleCommand;
   }
   
 }

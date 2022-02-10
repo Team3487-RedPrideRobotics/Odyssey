@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
     private RobotContainer m_robotContainer;
 
     private Command m_telopCommand;
+    private Command m_idleCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -68,6 +69,11 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void disabledInit() {
+        m_idleCommand = m_robotContainer.getIdleCommand();
+
+        if(m_idleCommand != null){
+            m_idleCommand.schedule();
+        }
     }
 
     @Override
@@ -79,6 +85,10 @@ public class Robot extends TimedRobot {
     */
     @Override
     public void autonomousInit() {
+
+        if (m_idleCommand != null) {
+            m_idleCommand.cancel();
+        }
 
         if (m_teleopCommand != null){
             m_teleopCommand.cancel();
@@ -104,6 +114,10 @@ public class Robot extends TimedRobot {
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
+        if (m_idleCommand != null) {
+            m_idleCommand.cancel();
+        }
+        
         if (m_autonomousCommand != null) {
             m_autonomousCommand.cancel();
         }
