@@ -16,6 +16,11 @@
           "open": true
         }
       },
+      "2": {
+        "header": {
+          "open": true
+        }
+      },
       "window": {
         "visible": true
       }

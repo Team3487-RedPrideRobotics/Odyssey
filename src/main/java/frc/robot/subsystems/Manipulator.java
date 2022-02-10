@@ -74,9 +74,9 @@ private Spark manipulatorRev;
         manipulatorRev = new Spark(Constants.ManipulatorConstants.revPort);
 
         deployEncoder = new Encoder(Constants.deployEncoderPorts[0], Constants.deployEncoderPorts[1]);
-        deployEncoder.setDistancePerPulse(360/1024);
+        deployEncoder.setDistancePerPulse(360d/1024d); //in degrees per pulse
         revEncoder = new Encoder(Constants.revEncoderPorts[0], Constants.revEncoderPorts[1]);
-        revEncoder.setDistancePerPulse(360/1024);
+        revEncoder.setDistancePerPulse(360d/1024d); //in degrees per pulse
 
         Shuffleboard.getTab("Manipulator").add((Sendable) deployEncoder);
         Shuffleboard.getTab("Manipulator").add((Sendable) revEncoder);
