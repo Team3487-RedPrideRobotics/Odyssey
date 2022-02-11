@@ -12,6 +12,8 @@
 package frc.robot.commands;
 import javax.swing.plaf.synth.SynthStyle;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drive;
 

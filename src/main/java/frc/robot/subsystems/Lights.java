@@ -15,6 +15,8 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.commands.*;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -65,6 +67,13 @@ public class Lights extends SubsystemBase {
 
     public void changeLights(double pwm){
         blinkin.set(pwm);
+    }
+
+    public double getAlliancePattern(){
+        if(DriverStation.getAlliance() != null){
+            return DriverStation.getAlliance() == Alliance.Red? 0.61:0.87 ;
+        }
+        return 0.61;
     }
 
 }

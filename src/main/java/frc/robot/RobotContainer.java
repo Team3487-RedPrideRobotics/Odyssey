@@ -83,7 +83,7 @@ private JoystickButton deployButton = new JoystickButton(xInput, XboxController.
 private JoystickButton retractButton = new JoystickButton(xInput, XboxController.Button.kLeftBumper.value);
 
     //commands
-    private final TeleopCommand m_teleopCommand = new TeleopCommand(m_drive, m_manipulator, m_climb);
+    private final TeleopCommand m_teleopCommand = new TeleopCommand(m_drive, m_manipulator, m_climb, m_ligts);
 
   private RobotContainer() {
     configureButtonBindings();

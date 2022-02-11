@@ -45,6 +45,7 @@
       "/LiveWindow/Drive": "Subsystem",
       "/LiveWindow/Drive/Differential Drive 1": "DifferentialDrive",
       "/LiveWindow/Example": "Subsystem",
+      "/LiveWindow/Lights": "Subsystem",
       "/LiveWindow/Manipulator": "Subsystem",
       "/LiveWindow/Ungrouped/ADXRS450_Gyro[0]": "Gyro",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
@@ -57,6 +58,7 @@
       "/LiveWindow/Ungrouped/Spark[5]": "Motor Controller",
       "/LiveWindow/Ungrouped/Spark[6]": "Motor Controller",
       "/LiveWindow/Ungrouped/Spark[7]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Spark[9]": "Motor Controller",
       "/Shuffleboard/Drivetrain/ADXRS450_Gyro[0]": "Gyro",
       "/Shuffleboard/Teleop/Control Scheme": "String Chooser"
     }
