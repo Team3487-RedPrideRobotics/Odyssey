@@ -17,6 +17,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -42,7 +43,7 @@ public NetworkTableEntry inputInverted;
 public NetworkTableEntry deployInverted;
 private Spark manipulatorRev;
 
- Encoder deployEncoder;
+ DutyCycleEncoder deployEncoder;
  Encoder revEncoder;
 private PIDController stableMotor;
 
@@ -75,8 +76,8 @@ private PIDController stableMotor;
 
         manipulatorRev = new Spark(Constants.ManipulatorConstants.revPort);
 
-        deployEncoder = new Encoder(Constants.deployEncoderPorts[0], Constants.deployEncoderPorts[1]);
-        deployEncoder.setDistancePerPulse(90d/6d); //in degrees per pulse
+        deployEncoder = new DutyCycleEncoder(Constants.deployEncoderPorts[0]);
+        deployEncoder.reset();
         revEncoder = new Encoder(Constants.revEncoderPorts[0], Constants.revEncoderPorts[1]);
         revEncoder.setDistancePerPulse(90d/6d); //in degrees per pulse
 
@@ -123,7 +124,7 @@ private PIDController stableMotor;
     }
 
     public double deployGetPosition(){
-        return deployEncoder.getDistance();
+        return deployEncoder.get();
     }
 
     public void deployResetEncoder(){
@@ -132,6 +133,10 @@ private PIDController stableMotor;
 
     public double revGetSpeed(){
         return revEncoder.getRate();
+    }
+    
+    public double deployGetSpeed(){
+        return manipulatorDeploy.get();
     }
 
 

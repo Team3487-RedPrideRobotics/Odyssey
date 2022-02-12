@@ -155,10 +155,16 @@ public class TeleopCommand extends CommandBase {
         }
 
         // deploy/retract
-        if(deployIntake){
+        if(retractIntake){
+            if(manipulator.deployGetSpeed() <= 0){
+                manipulator.deploySetSpeed(0.01);
+            }else if(manipulator.deployGetSpeed() <= 0.5){
+                manipulator.deploySetSpeed(manipulator.deployGetSpeed() + 0.01);
+            }else{
+                manipulator.deploySetSpeed(0.5);
+            }
+        }else if(deployIntake){
             manipulator.deploySetSpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
-        }else if(retractIntake){
-            manipulator.deploySetSpeed(0.25*deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
         }else{
             manipulator.deploySetVoltage(-3);
         }
