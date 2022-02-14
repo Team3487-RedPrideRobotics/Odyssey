@@ -77,6 +77,8 @@ private PIDController stableMotor;
         manipulatorRev = new Spark(Constants.ManipulatorConstants.revPort);
 
         deployEncoder = new DutyCycleEncoder(Constants.deployEncoderPorts[0]);
+        deployEncoder.setConnectedFrequencyThreshold(900);
+        deployEncoder.setDistancePerRotation(360);
         deployEncoder.reset();
         revEncoder = new Encoder(Constants.revEncoderPorts[0], Constants.revEncoderPorts[1]);
         revEncoder.setDistancePerPulse(90d/6d); //in degrees per pulse
