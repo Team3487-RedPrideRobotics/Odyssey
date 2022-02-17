@@ -10,7 +10,27 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "titleType": 0,
-        "tiles": {}
+        "tiles": {
+          "3,0": {
+            "size": [
+              6,
+              4
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://USB Camera 0",
+              "_title": "USB Camera 0",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": 59.0,
+              "fps": -1,
+              "imageWidth": 0,
+              "imageHeight": 0
+            }
+          }
+        }
       }
     },
     {
@@ -95,6 +115,94 @@
                   "_type": "Text View",
                   "_source0": "network_table:///LiveWindow/Ungrouped/Spark[6]/Value",
                   "_title": "Spark[6]/Value"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[9]",
+                  "_title": "/LiveWindow/Ungrouped/Spark[9]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[2]",
+                  "_title": "/LiveWindow/Ungrouped/Spark[2]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[4]",
+                  "_title": "/LiveWindow/Ungrouped/Spark[4]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Duty Cycle[0]/Frequency",
+                  "_title": "/LiveWindow/Ungrouped/Duty Cycle[0]/Frequency"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[7]/Value",
+                  "_title": "/LiveWindow/Ungrouped/DigitalInput[7]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[3]",
+                  "_title": "/LiveWindow/Ungrouped/Spark[3]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Encoder",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Encoder[2]",
+                  "_title": "/LiveWindow/Ungrouped/Encoder[2]"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[7]",
+                  "_title": "/LiveWindow/Ungrouped/Spark[7]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Duty Cycle[0]/Output",
+                  "_title": "/LiveWindow/Ungrouped/Duty Cycle[0]/Output"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DutyCycle Encoder[7]/Distance",
+                  "_title": "/LiveWindow/Ungrouped/DutyCycle Encoder[7]/Distance"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[5]",
+                  "_title": "/LiveWindow/Ungrouped/Spark[5]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Motor Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Spark[6]",
+                  "_title": "/LiveWindow/Ungrouped/Spark[6]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DutyCycle Encoder[7]/Is Connected",
+                  "_title": "/LiveWindow/Ungrouped/DutyCycle Encoder[7]/Is Connected",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[14]/Value",
+                  "_title": "/LiveWindow/Ungrouped/DigitalInput[14]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Counter[0]/Value",
+                  "_title": "Counter[0]/Value"
                 }
               ]
             }
@@ -148,7 +256,15 @@
               "_source0": "network_table:///LiveWindow/Example",
               "_title": "Example",
               "Layout/Label position": "BOTTOM",
-              "_children": []
+              "_children": [
+                {
+                  "_type": "Subsystem Layout",
+                  "_source0": "network_table:///LiveWindow/ExampleSubsystem",
+                  "_title": "LiveWindow/ExampleSubsystem",
+                  "Layout/Label position": "BOTTOM",
+                  "_children": []
+                }
+              ]
             }
           }
         }
@@ -156,9 +272,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 0.0,
+    "x": 2.4000000953674316,
     "y": 0.0,
-    "width": 1536.0,
-    "height": 824.0
+    "width": 1533.5999755859375,
+    "height": 830.4000244140625
   }
 }

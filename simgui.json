@@ -41,6 +41,7 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Camera": "Subsystem",
       "/LiveWindow/Climbing": "Subsystem",
       "/LiveWindow/Drive": "Subsystem",
       "/LiveWindow/Drive/Differential Drive 1": "DifferentialDrive",
@@ -49,8 +50,10 @@
       "/LiveWindow/Manipulator": "Subsystem",
       "/LiveWindow/Ungrouped/ADXRS450_Gyro[0]": "Gyro",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
+      "/LiveWindow/Ungrouped/DigitalInput[14]": "Digital Input",
       "/LiveWindow/Ungrouped/DigitalInput[4]": "Digital Input",
       "/LiveWindow/Ungrouped/DigitalInput[5]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[7]": "Digital Input",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/LiveWindow/Ungrouped/Spark[2]": "Motor Controller",
       "/LiveWindow/Ungrouped/Spark[3]": "Motor Controller",
@@ -59,6 +62,7 @@
       "/LiveWindow/Ungrouped/Spark[6]": "Motor Controller",
       "/LiveWindow/Ungrouped/Spark[7]": "Motor Controller",
       "/LiveWindow/Ungrouped/Spark[9]": "Motor Controller",
+      "/Shuffleboard/Climber/DigitalInput[14]": "Digital Input",
       "/Shuffleboard/Drivetrain/ADXRS450_Gyro[0]": "Gyro",
       "/Shuffleboard/Teleop/Control Scheme": "String Chooser"
     }

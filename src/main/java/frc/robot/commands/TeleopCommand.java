@@ -91,7 +91,7 @@ public class TeleopCommand extends CommandBase {
         blowSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Blow Speed", Constants.ManipulatorConstants.blowSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         suckSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Suck Speed", Constants.ManipulatorConstants.suckSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", .50, "Min", 0.0)).getEntry();
         revOuttakeSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Rev Outtake Speed", Constants.ManipulatorConstants.revOuttakeSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
-        revIntakeSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Rev Intake Speed", Constants.ManipulatorConstants.revIntakeSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 0.5, "Min", 0.0)).getEntry(); 
+        revIntakeSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Rev Intake Speed", Constants.ManipulatorConstants.revIntakeSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry(); 
         deploySpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Deploy Speed", Constants.ManipulatorConstants.deploySpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         elevatedHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Elevated Hook Speed", Constants.ClimbConstants.elevatedHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         movingHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Moving Hook Speed", Constants.ClimbConstants.movingHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Min",0.0,"Max",1.0)).getEntry();
@@ -147,9 +147,9 @@ public class TeleopCommand extends CommandBase {
 
         // rev
         if(revForward){
-            manipulator.revSetSpeed(revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+            manipulator.revSetSpeed(-revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
         }else if(revBackward){
-            manipulator.revSetSpeed(-revIntakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+            manipulator.revSetSpeed(revIntakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
         }else{
             manipulator.revSetSpeed(0);
         }
@@ -166,7 +166,7 @@ public class TeleopCommand extends CommandBase {
         }else if(deployIntake){
             manipulator.deploySetSpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
         }else{
-            manipulator.deploySetVoltage(-3);
+            manipulator.deploySetVoltage(Constants.ManipulatorConstants.deployIdleVoltage);
         }
 
         // climbing
@@ -191,12 +191,13 @@ public class TeleopCommand extends CommandBase {
         if(RobotContainer.getInstance().getRightClimbUpButton()){
             climb.setRightHookSpeed(elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
         }else if(RobotContainer.getInstance().getRightClimbDownButton()){
-            climb.setRightHookSpeed(-movingHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
+            climb.setRightHookSpeed(-elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
         }else{
             climb.setRightHookSpeed(0);
         }
 
-        lights.changeLights(lights.getAlliancePattern());
+       
+        
 
     }
 

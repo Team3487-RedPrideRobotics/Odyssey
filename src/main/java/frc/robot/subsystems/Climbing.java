@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -50,6 +51,7 @@ public class Climbing extends SubsystemBase {
         leftHook =  new Spark(Constants.ClimbConstants.leftHook);
         rightHook = new Spark(Constants.ClimbConstants.rightHook);
         backLimitSwitch = new DigitalInput(Constants.ClimbConstants.leftLSPort);
+        Shuffleboard.getTab("Climber").add((Sendable) backLimitSwitch);
         frontLimitSwitch= new DigitalInput(Constants.ClimbConstants.rightLSPort);
 
         elevatedHookEntry = Shuffleboard.getTab("Climber").add("Invert Elevated Hooks",Constants.ClimbConstants.elevatedHookInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();

@@ -55,12 +55,13 @@ public class Constants {
     public static double revSpeed = 1;
    public static double deployDeadzone = 1;
 public static double revIntakeSpeed = 0.5;
+public static double deployIdleVoltage = -3.4;
    }
 
    public static final class ClimbConstants{
 
     public static final int slidingPort = 5;
-    public static final int leftLSPort = 4;
+    public static final int leftLSPort = 14;
     public static final int rightLSPort = 5;
    public static final boolean elevatedHookInverted = false;
 	public static final boolean slidingHookInverted = true;
@@ -70,10 +71,11 @@ public static final double middleHookDeadzone = 0.1;
     public static int leftHook= 6;
     public static int rightHook = 7;
 
+
    }
 
 public static final int[] deployEncoderPorts = {7,6,5,4};
-public static final int[] revEncoderPorts = {14,15};
+public static final int[] revEncoderPorts = {16,15};
 public static final class LightConstants{
    public static final int blinkinPort = 9;
 };

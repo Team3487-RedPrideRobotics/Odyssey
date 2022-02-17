@@ -50,6 +50,7 @@ public class RobotContainer {
     public final Manipulator m_manipulator = new Manipulator();
     public final Climbing m_climb = new Climbing();
     public final Lights m_ligts = new Lights();
+    public final Camera m_camera = new Camera();;
 // Joysticks
 
   
