@@ -60,7 +60,7 @@ public class RobotContainer {
   * The container for the robot.  Contains subsystems, OI devices, and commands.
   */
 private final XboxController xInput = new XboxController(0);
-private final Joystick climbStick = new Joystick(1);
+private final XboxController climbStick = new XboxController(1);
 
 // control layout:
 //  XBOX CONTROLLER:
@@ -76,10 +76,6 @@ private final Joystick climbStick = new Joystick(1);
 //    BUTTON 1 (trigger): intake ball
 //    BUTTON 2 (side thumb button): shoot ball
 //joystick buttons
-private JoystickButton leftClimbUpButton = new JoystickButton(climbStick, 10);
-private JoystickButton leftClimbDownButton = new JoystickButton(climbStick, 9);
-private JoystickButton rightClimbDownButton = new JoystickButton(climbStick, 11);
-private JoystickButton rightClimbUpButton = new JoystickButton(climbStick, 12);
 private JoystickButton deployButton = new JoystickButton(xInput, XboxController.Button.kRightBumper.value);
 private JoystickButton retractButton = new JoystickButton(xInput, XboxController.Button.kLeftBumper.value);
 
@@ -92,32 +88,21 @@ private JoystickButton retractButton = new JoystickButton(xInput, XboxController
 
 
   public double getClimbForward() {
-    return climbStick.getY();
+    if(climbStick.getRightTriggerAxis() > climbStick.getLeftTriggerAxis()){
+      return climbStick.getRightTriggerAxis();
+    }
+    return -climbStick.getLeftTriggerAxis();
   }
 
 
 
 
-  public boolean getLeftClimbUpButton() {
-    return leftClimbUpButton.get();
+  public double getLeftClimb() {
+    return climbStick.getLeftY();
   }
 
-
-
-
-  public boolean getLeftClimbDownButton() {
-    return leftClimbDownButton.get();
-  }
-
-
-
-
-  public boolean getRightClimbUpButton() {
-    return rightClimbUpButton.get();
-  }
-
-  public boolean getRightClimbDownButton(){
-    return rightClimbDownButton.get();
+  public double getRightClimb() {
+    return climbStick.getRightY();
   }
 
 
@@ -131,6 +116,10 @@ private JoystickButton retractButton = new JoystickButton(xInput, XboxController
 
   public double getBlow() {
     return xInput.getLeftTriggerAxis();
+  }
+
+  public boolean getHoldIntake(){
+    return xInput.getXButton();
   }
 
 

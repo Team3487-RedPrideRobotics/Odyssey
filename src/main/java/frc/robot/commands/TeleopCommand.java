@@ -67,6 +67,7 @@ public class TeleopCommand extends CommandBase {
         private NetworkTableEntry deployDeadzone;
         private NetworkTableEntry slidingHookDeadzone;
         private NetworkTableEntry revIntakeSpeedEntry;
+        private NetworkTableEntry elevatedDeadzoneEntry;
 
     public TeleopCommand(Drive subsystem, Manipulator m_manipulator, Climbing m_climb, Lights m_lights) {
 
@@ -95,6 +96,9 @@ public class TeleopCommand extends CommandBase {
         deploySpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Deploy Speed", Constants.ManipulatorConstants.deploySpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         elevatedHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Elevated Hook Speed", Constants.ClimbConstants.elevatedHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         movingHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Moving Hook Speed", Constants.ClimbConstants.movingHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Min",0.0,"Max",1.0)).getEntry();
+        elevatedDeadzoneEntry = Shuffleboard.getTab("Teleop").addPersistent("Elevated Hook Deadzone", Constants.ClimbConstants.elevatedHookDeadzone).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Min",0.0,"Max",1.0)).getEntry();
+        
+        
         manipulator = m_manipulator;
         addRequirements(m_manipulator);
 
@@ -165,7 +169,7 @@ public class TeleopCommand extends CommandBase {
             }
         }else if(deployIntake){
             manipulator.deploySetSpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
-        }else{
+        }else if(RobotContainer.getInstance().getHoldIntake()){
             manipulator.deploySetVoltage(Constants.ManipulatorConstants.deployIdleVoltage);
         }
 
@@ -179,26 +183,18 @@ public class TeleopCommand extends CommandBase {
         }
 
         // left climber
-        if(RobotContainer.getInstance().getLeftClimbUpButton()){
-            climb.setLeftHookSpeed(elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
-        }else if(RobotContainer.getInstance().getLeftClimbDownButton()){
-            climb.setLeftHookSpeed(-elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
+        if(Math.abs(RobotContainer.getInstance().getLeftClimb()) > elevatedDeadzoneEntry.getDouble(Constants.ClimbConstants.elevatedHookDeadzone)){
+            climb.setLeftHookSpeed(RobotContainer.getInstance().getLeftClimb()*elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
         }else{
             climb.setLeftHookSpeed(0);
         }
 
         // right climber
-        if(RobotContainer.getInstance().getRightClimbUpButton()){
-            climb.setRightHookSpeed(elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
-        }else if(RobotContainer.getInstance().getRightClimbDownButton()){
-            climb.setRightHookSpeed(-elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
+        if(Math.abs(RobotContainer.getInstance().getRightClimb()) > elevatedDeadzoneEntry.getDouble(Constants.ClimbConstants.elevatedHookDeadzone)){
+            climb.setRightHookSpeed(RobotContainer.getInstance().getRightClimb()*elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
         }else{
             climb.setRightHookSpeed(0);
         }
-
-       
-        
-
     }
 
     // Called once the command ends or is interrupted.

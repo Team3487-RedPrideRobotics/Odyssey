@@ -68,6 +68,7 @@ public static double deployIdleVoltage = -3.4;
 	public static final double elevatedHookSpeed = 1;
 public static final double movingHookSpeed = 0.5;
 public static final double middleHookDeadzone = 0.1;
+public static final double elevatedHookDeadzone = 0.1;
     public static int leftHook= 6;
     public static int rightHook = 7;
 
