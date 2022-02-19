@@ -27,7 +27,7 @@ public class DriveStraightCommand extends CommandBase {
 
     public boolean finished;
 
-    private Double distanace;
+    private Double distance;
 
     private Double speed;
 
@@ -43,7 +43,7 @@ public class DriveStraightCommand extends CommandBase {
         m_drive = drive;
         addRequirements(m_drive);    
 
-        distanace = distanceInFeet;
+        distance = distanceInFeet;
         speed = m_speed;
 
         finished = false;
@@ -61,12 +61,22 @@ public class DriveStraightCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if(m_drive.getEncoderDistance()[0] >= distanace /* in feet*/){
-            m_drive.tankDriveRaw(0, 0);
-            finished = true;
+        if(distance >= 0){
+            if(m_drive.getEncoderDistance()[0] >= distance /* in feet*/){
+                m_drive.tankDriveRaw(0, 0);
+                finished = true;
+            }else{
+                m_drive.tankDriveRaw(Math.sqrt(speed),-Math.sqrt(speed));
+            }
         }else{
-            m_drive.tankDriveRaw(speed,-speed);
+            if(m_drive.getEncoderDistance()[0] <= distance /* in feet*/){
+                m_drive.tankDriveRaw(0, 0);
+                finished = true;
+            }else{
+                m_drive.tankDriveRaw(-Math.sqrt(speed),Math.sqrt(speed));
+            }
         }
+        
         
     }
 

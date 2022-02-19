@@ -145,32 +145,19 @@ public class TeleopCommand extends CommandBase {
 
         if(suckInput > blowInput){
             manipulator.inputSetSpeed(-suckInput * suckSpeedEntry.getDouble(Constants.ManipulatorConstants.suckSpeed));
+            manipulator.revSetSpeed(-suckInput * revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
         }else{
             manipulator.inputSetSpeed(blowInput * blowSpeedEntry.getDouble(Constants.ManipulatorConstants.blowSpeed));
+            manipulator.revSetSpeed(blowInput * revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
         }
 
         // rev
-        if(revForward){
-            manipulator.revSetSpeed(-revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
-        }else if(revBackward){
-            manipulator.revSetSpeed(revIntakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
-        }else{
-            manipulator.revSetSpeed(0);
-        }
 
         // deploy/retract
         if(retractIntake){
-            if(manipulator.deployGetSpeed() <= 0){
-                manipulator.deploySetSpeed(0.01);
-            }else if(manipulator.deployGetSpeed() <= 0.5){
-                manipulator.deploySetSpeed(manipulator.deployGetSpeed() + 0.01);
-            }else{
-                manipulator.deploySetSpeed(0.5);
-            }
-        }else if(deployIntake){
             manipulator.deploySetSpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
-        }else if(RobotContainer.getInstance().getHoldIntake()){
-            manipulator.deploySetVoltage(Constants.ManipulatorConstants.deployIdleVoltage);
+        }else if(deployIntake){
+            manipulator.deploySetSpeed(deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
         }else{
             manipulator.deploySetSpeed(0);
         }
