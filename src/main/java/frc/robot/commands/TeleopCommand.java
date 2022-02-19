@@ -171,6 +171,8 @@ public class TeleopCommand extends CommandBase {
             manipulator.deploySetSpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
         }else if(RobotContainer.getInstance().getHoldIntake()){
             manipulator.deploySetVoltage(Constants.ManipulatorConstants.deployIdleVoltage);
+        }else{
+            manipulator.deploySetSpeed(0);
         }
 
         // climbing
@@ -184,14 +186,14 @@ public class TeleopCommand extends CommandBase {
 
         // left climber
         if(Math.abs(RobotContainer.getInstance().getLeftClimb()) > elevatedDeadzoneEntry.getDouble(Constants.ClimbConstants.elevatedHookDeadzone)){
-            climb.setLeftHookSpeed(RobotContainer.getInstance().getLeftClimb()*elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
+            climb.setLeftHookSpeed(-RobotContainer.getInstance().getLeftClimb()*elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
         }else{
             climb.setLeftHookSpeed(0);
         }
 
         // right climber
         if(Math.abs(RobotContainer.getInstance().getRightClimb()) > elevatedDeadzoneEntry.getDouble(Constants.ClimbConstants.elevatedHookDeadzone)){
-            climb.setRightHookSpeed(RobotContainer.getInstance().getRightClimb()*elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
+            climb.setRightHookSpeed(-RobotContainer.getInstance().getRightClimb()*elevatedHookEntry.getDouble(Constants.ClimbConstants.elevatedHookSpeed));
         }else{
             climb.setRightHookSpeed(0);
         }
