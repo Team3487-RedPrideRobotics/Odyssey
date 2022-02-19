@@ -197,6 +197,8 @@ public class TeleopCommand extends CommandBase {
         }else{
             climb.setRightHookSpeed(0);
         }
+        
+        lights.changeLights(lights.getAlliancePattern());
     }
 
     // Called once the command ends or is interrupted.

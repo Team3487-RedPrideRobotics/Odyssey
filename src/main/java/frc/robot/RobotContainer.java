@@ -168,7 +168,7 @@ public boolean getIntakeRevBackwards(){
   */
   public Command getAutonomousCommand() {
     // The selected command will be run in autonomous
-    return new DriveStraightCommand(5d, 0.5, m_drive).andThen(new TurnCommand(m_drive, 90, 0.5)).andThen(new DriveStraightCommand(5d, 0.5, m_drive)).andThen(new TurnCommand(m_drive, 180, 0.5));
+    return new DriveStraightCommand(-5d, 0.5, m_drive);
   }
 
   public Command getTeleopCommand(){
