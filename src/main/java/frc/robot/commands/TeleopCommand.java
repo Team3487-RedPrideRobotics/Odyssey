@@ -90,7 +90,7 @@ public class TeleopCommand extends CommandBase {
         slidingHookDeadzone = Shuffleboard.getTab("Teleop").addPersistent("Middle Hook Deadzone", Constants.ClimbConstants.middleHookDeadzone).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max",1.0,"Min",0)).getEntry();
 
         blowSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Blow Speed", Constants.ManipulatorConstants.blowSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
-        suckSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Suck Speed", Constants.ManipulatorConstants.suckSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", .50, "Min", 0.0)).getEntry();
+        suckSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Suck Speed", Constants.ManipulatorConstants.suckSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         revOuttakeSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Rev Outtake Speed", Constants.ManipulatorConstants.revOuttakeSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         revIntakeSpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Rev Intake Speed", Constants.ManipulatorConstants.revIntakeSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry(); 
         deploySpeedEntry = Shuffleboard.getTab("Teleop").addPersistent("Deploy Speed", Constants.ManipulatorConstants.deploySpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
@@ -145,13 +145,21 @@ public class TeleopCommand extends CommandBase {
 
         if(suckInput > blowInput){
             manipulator.inputSetSpeed(-suckInput * suckSpeedEntry.getDouble(Constants.ManipulatorConstants.suckSpeed));
-            manipulator.revSetSpeed(-suckInput * revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+            manipulator.revSetSpeed(suckInput * revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
         }else{
             manipulator.inputSetSpeed(blowInput * blowSpeedEntry.getDouble(Constants.ManipulatorConstants.blowSpeed));
-            manipulator.revSetSpeed(blowInput * revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+            manipulator.revSetSpeed(-blowInput * revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
         }
 
         // rev
+
+        if(revForward){
+            manipulator.inputSetSpeed(revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+        }else if(revBackward){
+            manipulator.inputSetSpeed(revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+        }else{
+            manipulator.inputSetSpeed(0);
+        }
 
         // deploy/retract
         if(retractIntake){
