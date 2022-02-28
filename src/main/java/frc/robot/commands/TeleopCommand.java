@@ -143,23 +143,26 @@ public class TeleopCommand extends CommandBase {
         double suckInput = RobotContainer.getInstance().getSuck();
         double blowInput = RobotContainer.getInstance().getBlow();
 
-        if(suckInput > blowInput){
-            manipulator.inputSetSpeed(-suckInput * suckSpeedEntry.getDouble(Constants.ManipulatorConstants.suckSpeed));
-            manipulator.revSetSpeed(suckInput * revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
-        }else{
-            manipulator.inputSetSpeed(blowInput * blowSpeedEntry.getDouble(Constants.ManipulatorConstants.blowSpeed));
-            manipulator.revSetSpeed(-blowInput * revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
-        }
-
         // rev
-
+        /*
         if(revForward){
-            manipulator.inputSetSpeed(revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+            manipulator.inputSetSpeed(-revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
         }else if(revBackward){
             manipulator.inputSetSpeed(revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
         }else{
             manipulator.inputSetSpeed(0);
         }
+        */
+
+        if(suckInput > blowInput){
+            manipulator.inputSetSpeed(suckInput);
+            manipulator.revSetSpeed(suckInput);
+        }else{
+            manipulator.inputSetSpeed(-blowInput);
+            manipulator.revSetSpeed(-blowInput);
+        }
+
+        
 
         // deploy/retract
         if(retractIntake){
