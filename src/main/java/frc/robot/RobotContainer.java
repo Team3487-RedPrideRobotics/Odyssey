@@ -162,7 +162,7 @@ public boolean getIntakeRevBackwards(){
   */
   public Command getAutonomousCommand() {
     // The selected command will be run in autonomous
-    return (new TrolleyMoveCommand(-1, 1, m_climb).andThen(new DriveStraightCommand(-3d, 0.5, m_drive))).raceWith(new AllianceLightsCommand(m_ligts));
+    return (new TrolleyMoveCommand(-1, 1, m_climb).andThen(new DriveStraightCommand(-4d, 0.5, m_drive))).raceWith(new AllianceLightsCommand(m_ligts));
   }
 
   public Command getTeleopCommand(){
