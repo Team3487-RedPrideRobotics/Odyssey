@@ -68,6 +68,7 @@ public class TeleopCommand extends CommandBase {
         private NetworkTableEntry slidingHookDeadzone;
         private NetworkTableEntry revIntakeSpeedEntry;
         private NetworkTableEntry elevatedDeadzoneEntry;
+        private Boolean celebrating = false;
 
     public TeleopCommand(Drive subsystem, Manipulator m_manipulator, Climbing m_climb, Lights m_lights) {
 
@@ -143,6 +144,7 @@ public class TeleopCommand extends CommandBase {
         double suckInput = RobotContainer.getInstance().getSuck();
         double blowInput = RobotContainer.getInstance().getBlow();
 
+
         // rev
         /*
         if(revForward){
@@ -196,7 +198,18 @@ public class TeleopCommand extends CommandBase {
             climb.setRightHookSpeed(0);
         }
         
-        lights.changeLights(lights.getAlliancePattern());
+        if(RobotContainer.getInstance().getCelelebrationButton()){
+            if(celebrating){
+                celebrating = false;
+            }else{
+                celebrating = true;
+            };
+        }
+        if(celebrating){
+            lights.changeLights(-0.55);
+        }else{
+            lights.changeLights(lights.getAlliancePattern());
+        }
     }
 
     // Called once the command ends or is interrupted.
