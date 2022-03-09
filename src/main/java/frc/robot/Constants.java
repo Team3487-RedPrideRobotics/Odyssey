@@ -34,7 +34,7 @@ public class Constants {
     public static final int rightEncoder2 = 3;
     public static final boolean rightEncoderInverted = true;
     public static final double distancePerPulse = Math.PI*0.5/360; // in feet
-    public static final double driveSpeed = 1;
+    public static final double driveSpeed = 0.8;
    public static final double deadzone = 0.1;
 
 
@@ -65,7 +65,7 @@ public static double deployIdleVoltage = -3.4;
    public static final boolean elevatedHookInverted = false;
 	public static final boolean slidingHookInverted = true;
 	public static final double elevatedHookSpeed = 1;
-public static final double movingHookSpeed = 0.5;
+public static final double movingHookSpeed = 0.65;
 public static final double middleHookDeadzone = 0.1;
 public static final double elevatedHookDeadzone = 0.1;
     public static int leftHook= 6;
