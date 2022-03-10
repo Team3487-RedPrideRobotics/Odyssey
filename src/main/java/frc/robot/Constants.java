@@ -11,6 +11,7 @@
 
 package frc.robot;
 
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -20,13 +21,70 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public class Constants {
-   /**
-    * public static final class DriveConstants {
-    *   public static final int kLeftMotor1Port = 0;
-    *   public static final int kLeftMotor2Port = 1;
-    *   public static final int kRightMotor1Port = 2;
-    *   public static final int kRightMotor2Port = 3; 
-    * }
-    */ 
+   public static final class DriveConstants{
+
+    public static final int leftMotorPort = 0;
+    public static final boolean leftMotorInverted = false;
+    public static final boolean rightMotorInverted = false;
+    public static final int rightMotorPort = 1;
+    public static final int leftEncoder1 = 0;
+    public static final int leftEncoder2 = 1;
+    public static final boolean leftEncoderInverted = true;
+    public static final int rightEncoder1 = 2;
+    public static final int rightEncoder2 = 3;
+    public static final boolean rightEncoderInverted = true;
+    public static final double distancePerPulse = Math.PI*0.5/360; // in feet
+    public static final double driveSpeed = 0.8;
+   public static final double deadzone = 0.1;
+
+
+   }
+   public static final class ManipulatorConstants{
+
+      public static final int deployPort = 2;
+      public static final int inputPort = 3;
+      public static final int deploySpeed = 1;
+      public static final double suckSpeed = 0.5;
+      public static final double blowSpeed = 1;
+      public static final boolean inputInverted = false;
+      public static final boolean deployInverted = false;
+      public static final int revPort = 4;
+    public static final double revDeadzone = 0.1;
+    public static final double revOuttakeSpeed = 1;    public static double revSpeed = 1;
+   public static double deployDeadzone = 1;
+public static double revIntakeSpeed = 0.5;
+public static double deployIdleVoltage = -3.4;
+
+      // manipulator vs. gravity constants
+      public static double stall_torque = 12d/5.54; // V per in*lb
+      public static double weight = 15; //lbs
+      public static double center_of_mass = 14; //in
+      public static double gear_ratio = 133.33; //ul
+      public static double hold_multiplier = weight*center_of_mass*stall_torque/gear_ratio; // V
+      public static double starting_angle = 130d; // degrees :)
+   }
+
+   public static final class ClimbConstants{
+
+    public static final int slidingPort = 5;
+    public static final int leftLSPort = 14;
+    public static final int rightLSPort = 5;
+   public static final boolean elevatedHookInverted = false;
+	public static final boolean slidingHookInverted = true;
+	public static final double elevatedHookSpeed = 1;
+public static final double movingHookSpeed = 0.65;
+public static final double middleHookDeadzone = 0.1;
+public static final double elevatedHookDeadzone = 0.1;
+    public static int leftHook= 6;
+    public static int rightHook = 7;
+
+
+   }
+
+public static final int[] deployEncoderPorts = {4,5,6,7};
+public static final int[] revEncoderPorts = {16,15};
+public static final class LightConstants{
+   public static final int blinkinPort = 9;
+};
 }
 
