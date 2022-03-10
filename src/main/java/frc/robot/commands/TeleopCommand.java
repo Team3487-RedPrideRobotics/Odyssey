@@ -14,6 +14,7 @@ import java.nio.channels.ShutdownChannelGroupException;
 import java.util.Map;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -69,6 +70,7 @@ public class TeleopCommand extends CommandBase {
         private NetworkTableEntry revIntakeSpeedEntry;
         private NetworkTableEntry elevatedDeadzoneEntry;
         private Boolean celebrating = false;
+        private NetworkTableEntry manipulatorHoldEntry;
 
     public TeleopCommand(Drive subsystem, Manipulator m_manipulator, Climbing m_climb, Lights m_lights) {
 
@@ -98,7 +100,8 @@ public class TeleopCommand extends CommandBase {
         elevatedHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Elevated Hook Speed", Constants.ClimbConstants.elevatedHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Max", 1.0, "Min", 0.0)).getEntry();
         movingHookEntry = Shuffleboard.getTab("Teleop").addPersistent("Moving Hook Speed", Constants.ClimbConstants.movingHookSpeed).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Min",0.0,"Max",1.0)).getEntry();
         elevatedDeadzoneEntry = Shuffleboard.getTab("Teleop").addPersistent("Elevated Hook Deadzone", Constants.ClimbConstants.elevatedHookDeadzone).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("Min",0.0,"Max",1.0)).getEntry();
-        
+        manipulatorHoldEntry = Shuffleboard.getTab("Teleop").add("Manipulator Hold Constant", Constants.ManipulatorConstants.hold_multiplier).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 1, "max", 5)).getEntry();
+
         
         manipulator = m_manipulator;
         addRequirements(m_manipulator);
@@ -113,6 +116,7 @@ public class TeleopCommand extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        manipulator.deployResetEncoder();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -157,23 +161,41 @@ public class TeleopCommand extends CommandBase {
         */
 
         if(suckInput > blowInput){
-            manipulator.inputSetSpeed(suckInput);
             manipulator.revSetSpeed(suckInput);
+            manipulator.inputSetSpeed(suckInput);
         }else{
-            manipulator.inputSetSpeed(-blowInput);
             manipulator.revSetSpeed(-blowInput);
+            manipulator.inputSetSpeed(0);
         }
+        
+        if(manipulator.inputGetSpeed() == 0){
+            if(revForward){
+                manipulator.inputSetSpeed(-revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+            }else if(revBackward){
+                manipulator.inputSetSpeed(revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+            }else{
+                manipulator.inputSetSpeed(0);
+            }
+        }
+        
 
         
 
         // deploy/retract
+        double manipulatorAngle = manipulator.deployGetPosition();
+        double deploySpeed = 0;
         if(retractIntake){
             manipulator.deploySetSpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
         }else if(deployIntake){
             manipulator.deploySetSpeed(deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
+        }else if(manipulatorAngle < 90){
+            manipulator.deploySetVoltage(manipulatorHoldEntry.getDouble(Constants.ManipulatorConstants.hold_multiplier) * Math.cos(manipulatorAngle));
+            deploySpeed = manipulatorHoldEntry.getDouble(Constants.ManipulatorConstants.hold_multiplier) * Math.cos(manipulatorAngle);
         }else{
             manipulator.deploySetSpeed(0);
         }
+
+        
 
         // climbing
         double middleClimb = RobotContainer.getInstance().getClimbForward();

@@ -13,9 +13,12 @@
 package frc.robot.subsystems;
 
 
+import java.util.Map;
+
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
@@ -59,6 +62,7 @@ private Spark manipulatorRev;
         manipulatorDeploy = new Spark(Constants.ManipulatorConstants.deployPort);
         manipulatorDeploy.setInverted(Constants.ManipulatorConstants.deployInverted);
 
+
         inputInverted = Shuffleboard.getTab("Manipulator").add("Invert Input", Constants.ManipulatorConstants.inputInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
         deployInverted = Shuffleboard.getTab("Manipulator").add("Invert Deploy", Constants.ManipulatorConstants.deployInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
 
@@ -72,6 +76,7 @@ private Spark manipulatorRev;
 
 
 
+
         manipulatorRev = new Spark(Constants.ManipulatorConstants.revPort);
 
         deployEncoder = new DutyCycleEncoder(Constants.deployEncoderPorts[0]);
@@ -80,6 +85,7 @@ private Spark manipulatorRev;
         deployEncoder.reset();
         revEncoder = new Encoder(Constants.revEncoderPorts[0], Constants.revEncoderPorts[1]);
         revEncoder.setDistancePerPulse(90d/6d); //in degrees per pulse
+
 
         Shuffleboard.getTab("Manipulator").add((Sendable) deployEncoder);
         Shuffleboard.getTab("Manipulator").add((Sendable) revEncoder);
@@ -123,8 +129,12 @@ private Spark manipulatorRev;
         manipulatorRev.set(speed);
     }
 
+    public double inputGetSpeed(){
+        return manipulatorInput.get();
+    }
+
     public double deployGetPosition(){
-        return deployEncoder.get();
+        return Constants.ManipulatorConstants.starting_angle - deployEncoder.getDistance();
     }
 
     public void deployResetEncoder(){
