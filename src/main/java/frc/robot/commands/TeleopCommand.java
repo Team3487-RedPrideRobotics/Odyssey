@@ -162,10 +162,10 @@ public class TeleopCommand extends CommandBase {
 
         if(suckInput > blowInput){
             manipulator.revSetSpeed(suckInput);
-            manipulator.inputSetSpeed(suckInput);
+            manipulator.inputSetSpeed(0);
         }else{
             manipulator.revSetSpeed(-blowInput);
-            manipulator.inputSetSpeed(0);
+            manipulator.inputSetSpeed(-blowInput);
         }
         
         if(manipulator.inputGetSpeed() == 0){
@@ -189,8 +189,9 @@ public class TeleopCommand extends CommandBase {
         }else if(deployIntake){
             manipulator.deploySetSpeed(deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
         }else if(manipulatorAngle < 90){
-            manipulator.deploySetVoltage(manipulatorHoldEntry.getDouble(Constants.ManipulatorConstants.hold_multiplier) * Math.cos(manipulatorAngle));
+            manipulator.deploySetVoltage(manipulatorHoldEntry.getDouble(Constants.ManipulatorConstants.hold_multiplier));
             deploySpeed = manipulatorHoldEntry.getDouble(Constants.ManipulatorConstants.hold_multiplier) * Math.cos(manipulatorAngle);
+            System.out.println(deploySpeed);
         }else{
             manipulator.deploySetSpeed(0);
         }

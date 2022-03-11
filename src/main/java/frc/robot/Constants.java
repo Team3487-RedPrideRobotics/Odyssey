@@ -60,7 +60,7 @@ public static double deployIdleVoltage = -3.4;
       public static double weight = 15; //lbs
       public static double center_of_mass = 14; //in
       public static double gear_ratio = 133.33; //ul
-      public static double hold_multiplier = weight*center_of_mass*stall_torque/gear_ratio; // V
+      public static double hold_multiplier = 2.15; // V
       public static double starting_angle = 130d; // degrees :)
    }
 
