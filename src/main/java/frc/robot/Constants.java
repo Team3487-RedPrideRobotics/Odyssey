@@ -52,7 +52,8 @@ public class Constants {
     public static final double revDeadzone = 0.1;
     public static final double revOuttakeSpeed = 1;
     public static final double desired_angle = 79;
-    public static final double threshold = 2.5;    public static double revSpeed = 1;
+    public static final double threshold = 2.5;
+    public static final double rev_time = 4;    public static double revSpeed = 1;
    public static double deployDeadzone = 1;
 public static double revIntakeSpeed = 0.5;
 public static double deployIdleVoltage = -3.4;

@@ -11,6 +11,7 @@
 
 package frc.robot.commands;
 import java.nio.channels.ShutdownChannelGroupException;
+import java.text.RuleBasedCollator;
 import java.util.Map;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -126,6 +127,7 @@ public class TeleopCommand extends CommandBase {
     @Override
     public void initialize() {
         manipulator.deployResetEncoder();
+        shoot_time.start();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -258,20 +260,24 @@ public class TeleopCommand extends CommandBase {
         }else{
             lights.changeLights(lights.getAlliancePattern());
         }
+        System.out.println(shoot_time.get());
+
     }
 
     private void shoot_ball() {
+        if(RobotContainer.getInstance().getResetShootTimer()){
+            System.out.println("Resetting!");
+            shoot_time.reset();
+        }
         manipulator.revSetSpeed(1);
-        if(ready_to_shoot){
+        if(shoot_time.get() >= ManipulatorConstants.rev_time){
             manipulator.inputSetSpeed(1);
         }
     }
 
     private void go_to_shoot() {
         double deltaDistance = manipulator.deployGetPosition()-Constants.ManipulatorConstants.desired_angle;
-        System.out.println(deltaDistance);
         if(Math.abs(deltaDistance) >= Constants.ManipulatorConstants.threshold){
-            shoot_time.reset();
             ready_to_shoot = false;
             manipulator.deploySetSpeed(1 * -1 * Math.signum(deltaDistance) *  Math.abs(deltaDistance/71));
         }else{

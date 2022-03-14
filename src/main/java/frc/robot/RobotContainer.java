@@ -118,6 +118,10 @@ private final XboxController climbStick = new XboxController(1);
     return xInput.getXButton();
   }
 
+  public boolean getResetShootTimer(){
+    return xInput.getBButtonPressed();
+  }
+
 
 
 
