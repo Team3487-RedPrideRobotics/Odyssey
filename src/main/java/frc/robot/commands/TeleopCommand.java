@@ -260,8 +260,6 @@ public class TeleopCommand extends CommandBase {
         }else{
             lights.changeLights(lights.getAlliancePattern());
         }
-        System.out.println(shoot_time.get());
-
     }
 
     private void shoot_ball() {
