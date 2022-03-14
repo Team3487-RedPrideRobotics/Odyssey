@@ -113,7 +113,7 @@ private final XboxController climbStick = new XboxController(1);
     return xInput.getLeftTriggerAxis();
   }
 
-  
+
   public boolean getHoldIntake(){
     return xInput.getXButton();
   }
@@ -156,6 +156,10 @@ public boolean getIntakeRevBackwards(){
 
 public boolean getCelelebrationButton(){
   return climbStick.getAButtonPressed();
+}
+
+public boolean getShootButton(){
+  return xInput.getBButton();
 }
 
 
