@@ -14,7 +14,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
@@ -82,6 +81,7 @@ public class Manipulator extends SubsystemBase {
 		deployEncoder.setConnectedFrequencyThreshold(900);
 		deployEncoder.setDistancePerRotation(360);
 		deployEncoder.reset();
+		//todo remove revEncoder logic?
 		revEncoder = new Encoder(Constants.revEncoderPorts[0], Constants.revEncoderPorts[1]);
 		revEncoder.setDistancePerPulse(90d / 6d); //in degrees per pulse
 		
@@ -107,45 +107,43 @@ public class Manipulator extends SubsystemBase {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	
-	public void deploySetSpeed(double speed) {
+	public void setDeploySpeed(double speed) {
 		manipulatorDeploy.set(speed);
-		
 	}
-	
-	public void deploySetVoltage(double voltage) {
-		manipulatorDeploy.setVoltage(voltage);
-	}
-	
-	public void inputSetSpeed(double speed) {
-		manipulatorInput.set(speed);
-		
-	}
-	
-	public void revSetSpeed(double speed) {
-		manipulatorRev.set(speed);
-	}
-	
-	public double inputGetSpeed() {
-		return manipulatorInput.get();
-	}
-	
-	public double deployGetPosition() {
-		return Constants.ManipulatorConstants.starting_angle - deployEncoder.getDistance();
-	}
-	
-	public void deployResetEncoder() {
-		deployEncoder.reset();
-	}
-	
-	public double revGetSpeed() {
-		return revEncoder.getRate();
-	}
-	
-	public double deployGetSpeed() {
+	public double getDeploySpeed() {
 		return manipulatorDeploy.get();
 	}
 	
 	
+	public void setInputSpeed(double speed) {
+		manipulatorInput.set(speed);
+	}
+	public double getInputSpeed() {
+		return manipulatorInput.get();
+	}
+	
+	
+	public void setRevSpeed(double speed) {
+		manipulatorRev.set(speed);
+	}
+	public double getRevSpeed() {
+		return revEncoder.getRate();
+	}
+	
+	
+	public double getDeployPosition() {
+		return Constants.ManipulatorConstants.starting_angle - deployEncoder.getDistance();
+	}
+	
+	
+	public void resetDeployEncoder() {
+		deployEncoder.reset();
+	}
+	
+	
+	public void setDeployVoltage(double voltage) {
+		manipulatorDeploy.setVoltage(voltage);
+	}
 }
 
 

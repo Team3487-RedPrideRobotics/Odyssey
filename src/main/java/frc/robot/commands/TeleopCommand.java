@@ -64,6 +64,14 @@ public class TeleopCommand extends CommandBase {
 	private Boolean celebrating = false;
 	private final NetworkTableEntry manipulatorHoldEntry;
 	
+	//todo break out logic into smaller classes
+	/*
+	obviously this is a huge class that will get a lot of attention.
+	as such, we should make it as readable and maintainable as possible.
+	the two easy wins i see are to break out the suffleboard logic to another class
+	and to break out logic so that each input calls a single method found elsewhere
+	 */
+	
 	public TeleopCommand(Drive subsystem, Manipulator m_manipulator, Climbing m_climb, Lights m_lights) {
 		
 		
@@ -162,7 +170,7 @@ public class TeleopCommand extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		manipulator.deployResetEncoder();
+		manipulator.resetDeployEncoder();
 	}
 	
 	// Called every time the scheduler runs while the command is scheduled.
@@ -210,42 +218,42 @@ public class TeleopCommand extends CommandBase {
         */
 		
 		if (suckInput > blowInput) {
-			manipulator.revSetSpeed(suckInput);
-			manipulator.inputSetSpeed(suckInput);
+			manipulator.setRevSpeed(suckInput);
+			manipulator.setInputSpeed(suckInput);
 		}
 		else {
-			manipulator.revSetSpeed(-blowInput);
-			manipulator.inputSetSpeed(0);
+			manipulator.setRevSpeed(-blowInput);
+			manipulator.setInputSpeed(0);
 		}
 		
-		if (manipulator.inputGetSpeed() == 0) {
+		if (manipulator.getInputSpeed() == 0) {
 			if (revForward) {
-				manipulator.inputSetSpeed(-revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+				manipulator.setInputSpeed(-revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
 			}
 			else if (revBackward) {
-				manipulator.inputSetSpeed(revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+				manipulator.setInputSpeed(revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
 			}
 			else {
-				manipulator.inputSetSpeed(0);
+				manipulator.setInputSpeed(0);
 			}
 		}
 		
 		
 		// deploy/retract
-		double manipulatorAngle = manipulator.deployGetPosition();
+		double manipulatorAngle = manipulator.getDeployPosition();
 		double deploySpeed = 0;
 		if (retractIntake) {
-			manipulator.deploySetSpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
+			manipulator.setDeploySpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
 		}
 		else if (deployIntake) {
-			manipulator.deploySetSpeed(deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
+			manipulator.setDeploySpeed(deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
 		}
 		else if (manipulatorAngle < 90) {
-			manipulator.deploySetVoltage(manipulatorHoldEntry.getDouble(Constants.ManipulatorConstants.hold_multiplier) * Math.cos(manipulatorAngle));
+			manipulator.setDeployVoltage(manipulatorHoldEntry.getDouble(Constants.ManipulatorConstants.hold_multiplier) * Math.cos(manipulatorAngle));
 			deploySpeed = manipulatorHoldEntry.getDouble(Constants.ManipulatorConstants.hold_multiplier) * Math.cos(manipulatorAngle);
 		}
 		else {
-			manipulator.deploySetSpeed(0);
+			manipulator.setDeploySpeed(0);
 		}
 		
 		

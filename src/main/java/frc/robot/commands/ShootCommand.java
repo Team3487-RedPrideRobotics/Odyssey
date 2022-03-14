@@ -57,50 +57,50 @@ public class ShootCommand extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		manipulator.deployResetEncoder();
+		manipulator.resetDeployEncoder();
 	}
 	
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
 		if (m_speed < 0) {
-			if (manipulator.deployGetPosition() >= m_angle) {
-				manipulator.deploySetSpeed(-m_speed);
+			if (manipulator.getDeployPosition() >= m_angle) {
+				manipulator.setDeploySpeed(-m_speed);
 			}
 			else {
-				manipulator.deploySetVoltage(Constants.ManipulatorConstants.deployIdleVoltage);
+				manipulator.setDeployVoltage(Constants.ManipulatorConstants.deployIdleVoltage);
 				shooting = true;
 			}
 		}
 		else if (m_speed > 0) {
-			if (manipulator.deployGetPosition() <= m_angle) {
-				manipulator.deploySetSpeed(m_speed);
+			if (manipulator.getDeployPosition() <= m_angle) {
+				manipulator.setDeploySpeed(m_speed);
 			}
 			else {
-				manipulator.deploySetVoltage(Constants.ManipulatorConstants.deployIdleVoltage);
+				manipulator.setDeployVoltage(Constants.ManipulatorConstants.deployIdleVoltage);
 				shooting = true;
 			}
 		}
 		else {
 			shooting = true;
-			manipulator.deploySetVoltage(Constants.ManipulatorConstants.deployIdleVoltage);
+			manipulator.setDeployVoltage(Constants.ManipulatorConstants.deployIdleVoltage);
 		}
 		if (shooting == true) {
 			if (m_shoot_speed == 0) {
 				finished = true;
 			}
 			else {
-				manipulator.revSetSpeed(0.5);
-				if (manipulator.revGetSpeed() >= 390) {
-					manipulator.inputSetSpeed(-m_shoot_speed);
+				manipulator.setRevSpeed(0.5);
+				if (manipulator.getRevSpeed() >= 390) {
+					manipulator.setInputSpeed(-m_shoot_speed);
 					if (firstPass) {
 						timer.start();
 						firstPass = false;
 					}
 					else if (timer.get() <= 2) {
 						finished = true;
-						manipulator.revSetSpeed(0);
-						manipulator.inputSetSpeed(0);
+						manipulator.setRevSpeed(0);
+						manipulator.setInputSpeed(0);
 					}
 				}
 			}
