@@ -185,6 +185,16 @@ public boolean getShootButton(){
   public Command getIdleCommand(){
     return null;
   }
+
+
+public boolean getResetEncoderButton() {
+    return xInput.getXButton();
+}
+
+
+public boolean getResetEncoderButtonPressed() {
+    return xInput.getXButtonPressed();
+}
   
 }
 

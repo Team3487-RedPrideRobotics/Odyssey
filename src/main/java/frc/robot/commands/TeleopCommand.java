@@ -77,6 +77,7 @@ public class TeleopCommand extends CommandBase {
         private boolean shooting;
         private boolean ready_to_shoot;
         private Timer shoot_time;
+        private Timer reset_timer;
 
     public TeleopCommand(Drive subsystem, Manipulator m_manipulator, Climbing m_climb, Lights m_lights) {
 
@@ -121,6 +122,8 @@ public class TeleopCommand extends CommandBase {
         addRequirements(m_lights);
 
         shoot_time = new Timer();
+
+        reset_timer = new Timer();
     }
 
     // Called when the command is initially scheduled.
@@ -128,6 +131,7 @@ public class TeleopCommand extends CommandBase {
     public void initialize() {
         manipulator.deployResetEncoder();
         shoot_time.start();
+        reset_timer.start();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -200,6 +204,17 @@ public class TeleopCommand extends CommandBase {
             shooting = true;
         }else{
             shooting = false;
+        }
+
+        // reset encoders
+        System.out.println(reset_timer.get());
+        if(RobotContainer.getInstance().getResetEncoderButton()){
+            if(RobotContainer.getInstance().getResetEncoderButtonPressed()){
+                reset_timer.reset();
+            }
+            if(reset_timer.get() >= 3){
+                manipulator.deployResetEncoder();
+            }
         }
 
 
