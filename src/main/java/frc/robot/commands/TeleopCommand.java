@@ -204,12 +204,11 @@ public class TeleopCommand extends CommandBase {
         }
 
         // reset encoders
-        System.out.println(reset_timer.get());
         if(RobotContainer.getInstance().getResetEncoderButton()){
             if(RobotContainer.getInstance().getResetEncoderButtonPressed()){
                 reset_timer.reset();
             }
-            if(reset_timer.get() >= 3){
+            if(reset_timer.get() >= 2){
                 manipulator.deployResetEncoder();
             }
         }

@@ -51,7 +51,7 @@ public class Constants {
       public static final int revPort = 4;
     public static final double revDeadzone = 0.1;
     public static final double revOuttakeSpeed = 1;
-    public static final double desired_angle = 79;
+    public static final int desired_angle = 79;
     public static final double threshold = 2.5;
     public static final double rev_time = 2;    public static double revSpeed = 1;
    public static double deployDeadzone = 1;
@@ -64,7 +64,7 @@ public static double deployIdleVoltage = -3.4;
       public static double center_of_mass = 14; //in
       public static double gear_ratio = 133.33; //ul
       public static double hold_multiplier = 2.15; // V
-      public static double starting_angle = 130d; // degrees :)
+      public static int starting_angle = 130; // degrees :)
    }
 
    public static final class ClimbConstants{
