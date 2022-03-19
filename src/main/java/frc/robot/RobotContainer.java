@@ -54,6 +54,7 @@ public class RobotContainer {
     public final Manipulator m_manipulator = new Manipulator();
     public final Climbing m_climb = new Climbing();
     public final Lights m_ligts = new Lights();
+    //public final Camera m_camera = new Camera();
 // Joysticks
 
   
@@ -67,7 +68,7 @@ public class RobotContainer {
 
 // auto chooser
   private final SendableChooser<Command> autoChooser;
-  private final Command intakeAutoCommand = (new ShootCommand(m_manipulator, 0.95, 85).andThen(new DriveStraightCommand(-13d, 0.5, m_drive).raceWith((new DeployCommand(m_manipulator, ManipulatorConstants.starting_angle))))).raceWith(new AllianceLightsCommand(m_ligts));
+  private final Command intakeAutoCommand = (new ShootCommand(m_manipulator, 0.95, 79).andThen(new DriveStraightCommand(-13d, 0.5, m_drive).raceWith((new DeployCommand(m_manipulator, ManipulatorConstants.starting_angle))))).raceWith(new AllianceLightsCommand(m_ligts));
   private final Command trolleyAutoCommand =  (new TrolleyMoveCommand(-1, 1, m_climb).andThen(new WaitCommand(1)).andThen(new DriveStraightCommand(-13d, 0.5, m_drive))).raceWith(new AllianceLightsCommand(m_ligts));
   
     //commands
@@ -176,7 +177,7 @@ public boolean getShootButton(){
   */
   public Command getAutonomousCommand() {
     // The selected command will be run in autonomous
-      return autoChooser.getSelected();
+      return (new ShootCommand(m_manipulator, 0.95, 79).andThen(new DriveStraightCommand(-13d, 0.5, m_drive).raceWith((new DeployCommand(m_manipulator, ManipulatorConstants.starting_angle))))).raceWith(new AllianceLightsCommand(m_ligts));
   }
 
   public Command getTeleopCommand(){

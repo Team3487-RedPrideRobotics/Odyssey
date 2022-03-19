@@ -94,7 +94,7 @@ public class DeployCommand extends CommandBase {
         if(Math.abs(deltaDistance) >= Constants.ManipulatorConstants.threshold){
             manipulator.deploySetSpeed(1 * -1 * Math.signum(deltaDistance) *  Math.abs(deltaDistance/71));
         }else{
-            finished = true;
+            manipulator.deploySetSpeed(0);
         }
     }
 }
