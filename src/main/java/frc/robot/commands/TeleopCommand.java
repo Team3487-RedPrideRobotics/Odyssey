@@ -181,9 +181,6 @@ public class TeleopCommand extends CommandBase {
         }else{
             manipulator.revSetSpeed(-blowInput);
             manipulator.inputSetSpeed(-blowInput);
-            if(blowInput > 0.1){
-                manipulator.deploySetSpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
-            }
         }
         
         if(manipulator.inputGetSpeed() == 0){
@@ -236,6 +233,10 @@ public class TeleopCommand extends CommandBase {
             manipulator.deploySetSpeed(0);
         }
 
+        if(blowInput > 0.1){
+            manipulator.deploySetSpeed(-deploySpeedEntry.getDouble(Constants.ManipulatorConstants.deploySpeed));
+        }
+
 
 
         
@@ -274,6 +275,10 @@ public class TeleopCommand extends CommandBase {
             lights.changeLights(-0.89);
         }else{
             lights.changeLights(lights.getAlliancePattern());
+        }
+
+        if(shooting){
+            lights.changeLights(lights.getShootingPattern());
         }
     }
 
