@@ -108,7 +108,7 @@ public class ShootCommand extends CommandBase {
 
     private void go_to_shoot() {
         double deltaDistance = manipulator.deployGetPosition()-m_shoot_angle;
-        if(Math.abs(deltaDistance) >= Constants.ManipulatorConstants.threshold){
+        if(Math.abs(deltaDistance) >= 2){
             manipulator.deploySetSpeed(1 * -1 * Math.signum(deltaDistance) *  Math.abs(deltaDistance/71));
         }else{
             manipulator.deploySetVoltage(ManipulatorConstants.hold_multiplier);
