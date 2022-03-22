@@ -20,10 +20,18 @@
         "header": {
           "open": true
         }
+      },
+      "window": {
+        "visible": true
       }
     },
     "Other Devices": {
       "ADXRS450[0]": {
+        "header": {
+          "open": true
+        }
+      },
+      "DutyCycleEncoder[4]": {
         "header": {
           "open": true
         }
@@ -64,6 +72,7 @@
       "/LiveWindow/Ungrouped/Spark[6]": "Motor Controller",
       "/LiveWindow/Ungrouped/Spark[7]": "Motor Controller",
       "/LiveWindow/Ungrouped/Spark[9]": "Motor Controller",
+      "/Shuffleboard/Autonomous/SendableChooser[0]": "String Chooser",
       "/Shuffleboard/Climber/DigitalInput[14]": "Digital Input",
       "/Shuffleboard/Drivetrain/ADXRS450_Gyro[0]": "Gyro",
       "/Shuffleboard/Teleop/Control Scheme": "String Chooser"
