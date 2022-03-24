@@ -23,10 +23,10 @@ package frc.robot;
 public class Constants {
    public static final class DriveConstants{
 
-    public static final int leftMotorPort = 0;
+    public static final int leftMotorPort = 1;
     public static final boolean leftMotorInverted = false;
     public static final boolean rightMotorInverted = false;
-    public static final int rightMotorPort = 1;
+    public static final int rightMotorPort = 0;
     public static final int leftEncoder1 = 0;
     public static final int leftEncoder2 = 1;
     public static final boolean leftEncoderInverted = true;
