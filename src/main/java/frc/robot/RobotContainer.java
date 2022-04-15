@@ -197,6 +197,11 @@ public boolean getResetEncoderButton() {
 public boolean getResetEncoderButtonPressed() {
     return xInput.getXButtonPressed();
 }
+
+
+public boolean getHyperButton() {
+  return xInput.getStartButtonPressed();
+}
   
 }
 

@@ -73,6 +73,8 @@ public class TeleopCommand extends CommandBase {
         private NetworkTableEntry revIntakeSpeedEntry;
         private NetworkTableEntry elevatedDeadzoneEntry;
         private Boolean celebrating = false;
+        private Boolean hyperDrive = false;
+
         private NetworkTableEntry manipulatorHoldEntry;
         private boolean shooting;
         private boolean ready_to_shoot;
@@ -137,6 +139,17 @@ public class TeleopCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        if(RobotContainer.getInstance().getHyperButton()){
+            if(hyperDrive){
+                hyperDrive = false;
+            }else{
+                hyperDrive = true;
+            };
+        }
+        double trueDriveSpeed = Math.sqrt(driveSpeedEntry.getDouble(Constants.DriveConstants.driveSpeed));
+        if(hyperDrive){
+            trueDriveSpeed = 1;
+        }
         // drive
         double[] sticks = RobotContainer.getInstance().getYAxes();
          if(leftInvertedChooser.getBoolean(false)){
@@ -150,7 +163,7 @@ public class TeleopCommand extends CommandBase {
             rightInverted = 1;
         }
         if(Math.abs(sticks[0]) > deadzoneChooser.getDouble(Constants.DriveConstants.deadzone) || Math.abs(sticks[1]) > deadzoneChooser.getDouble(Constants.DriveConstants.deadzone)){
-            m_drive.tankDriveRaw(sticks[0]*Math.sqrt(driveSpeedEntry.getDouble(Constants.DriveConstants.driveSpeed))*leftInverted, sticks[1]*Math.sqrt(driveSpeedEntry.getDouble(Constants.DriveConstants.driveSpeed))*rightInverted);
+            m_drive.tankDriveRaw(sticks[0]*trueDriveSpeed*leftInverted, sticks[1]*trueDriveSpeed*rightInverted);
         }else{
             m_drive.tankDriveRaw(0, 0);
         }
