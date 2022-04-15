@@ -274,7 +274,7 @@ public class TeleopCommand extends CommandBase {
             };
         }
         if(celebrating){
-            lights.changeLights(-0.89);
+            lights.changeLights(0.47);
         }else{
             lights.changeLights(lights.getAlliancePattern());
         }

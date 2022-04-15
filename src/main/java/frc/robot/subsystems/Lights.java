@@ -76,7 +76,7 @@ public class Lights extends SubsystemBase {
 
     public double getShootingPattern(){
         if(DriverStation.getAlliance() != null){
-            return DriverStation.getAlliance() == Alliance.Red? 0.07:0.27 ;
+            return DriverStation.getAlliance() == Alliance.Red? -0.25:-0.23 ;
         }
 
         return 0.13;
