@@ -50,7 +50,7 @@ public class Constants {
       public static final boolean deployInverted = false;
       public static final int revPort = 4;
     public static final double revDeadzone = 0.1;
-    public static final double revOuttakeSpeed = 1;
+    public static final double revOuttakeSpeed = 0.85;
     public static final int desired_angle = 79;
     public static final double threshold = 2.5;
     public static final double rev_time = 2;    public static double revSpeed = 1;
@@ -65,6 +65,7 @@ public static double deployIdleVoltage = -3.4;
       public static double gear_ratio = 133.33; //ul
       public static double hold_multiplier = 2.15; // V
       public static int starting_angle = 130; // degrees :)
+      public static boolean revInverted = true;
    }
 
    public static final class ClimbConstants{

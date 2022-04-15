@@ -177,6 +177,9 @@ public class TeleopCommand extends CommandBase {
 
         if(suckInput > blowInput){
             manipulator.revSetSpeed(suckInput);
+            if(!revForward){
+                manipulator.inputSetSpeed(revOuttakeSpeedEntry.getDouble(Constants.ManipulatorConstants.revSpeed));
+            }
             manipulator.inputSetSpeed(0);
         }else{
             manipulator.revSetSpeed(-blowInput);
@@ -286,7 +289,7 @@ public class TeleopCommand extends CommandBase {
             System.out.println("Resetting!");
             shoot_time.reset();
         }
-        manipulator.revSetSpeed(1);
+        manipulator.revSetSpeed(Constants.ManipulatorConstants.revOuttakeSpeed);
         if(shoot_time.get() >= ManipulatorConstants.rev_time){
             manipulator.inputSetSpeed(1);
         }
