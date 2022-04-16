@@ -148,7 +148,7 @@ public class TeleopCommand extends CommandBase {
         }
         double trueDriveSpeed = Math.sqrt(driveSpeedEntry.getDouble(Constants.DriveConstants.driveSpeed));
         if(hyperDrive){
-            trueDriveSpeed = 1;
+            trueDriveSpeed = Math.sqrt(0.9);
         }
         // drive
         double[] sticks = RobotContainer.getInstance().getYAxes();
@@ -287,7 +287,7 @@ public class TeleopCommand extends CommandBase {
             };
         }
         if(celebrating){
-            lights.changeLights(0.47);
+            lights.changeLights(0.21);
         }else{
             lights.changeLights(lights.getAlliancePattern());
         }
