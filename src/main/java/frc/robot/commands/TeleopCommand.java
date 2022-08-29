@@ -302,7 +302,7 @@ public class TeleopCommand extends CommandBase {
             System.out.println("Resetting!");
             shoot_time.reset();
         }
-        manipulator.revSetSpeed(Constants.ManipulatorConstants.revOuttakeSpeed);
+        manipulator.revSetSpeed(revOuttakeSpeedEntry.getDouble(ManipulatorConstants.revOuttakeSpeed));
         if(shoot_time.get() >= ManipulatorConstants.rev_time){
             manipulator.inputSetSpeed(1);
         }

@@ -177,7 +177,7 @@ public boolean getShootButton(){
   */
   public Command getAutonomousCommand() {
     // The selected command will be run in autonomous
-      return (new ShootCommand(m_manipulator, 0.5, 79).andThen(new DriveStraightCommand(-13d, 0.5, m_drive).raceWith((new DeployCommand(m_manipulator, ManipulatorConstants.starting_angle))))).raceWith(new AllianceLightsCommand(m_ligts));
+      return (new ShootCommand(m_manipulator, 0.8, 80).andThen(new DriveStraightCommand(3d, -0.6, m_drive).raceWith((new DeployCommand(m_manipulator, ManipulatorConstants.starting_angle))))).raceWith(new AllianceLightsCommand(m_ligts));
   }
 
   public Command getTeleopCommand(){
