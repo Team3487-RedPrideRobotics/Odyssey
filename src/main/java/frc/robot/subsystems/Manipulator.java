@@ -63,21 +63,10 @@ private Spark manipulatorRev;
         manipulatorDeploy.setInverted(Constants.ManipulatorConstants.deployInverted);
 
 
-        inputInverted = Shuffleboard.getTab("Manipulator").add("Invert Input", Constants.ManipulatorConstants.inputInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
-        deployInverted = Shuffleboard.getTab("Manipulator").add("Invert Deploy", Constants.ManipulatorConstants.deployInverted).withWidget(BuiltInWidgets.kToggleSwitch).getEntry();
-
-        inputInverted.addListener(event ->{
-            manipulatorInput.setInverted(inputInverted.getBoolean(Constants.ManipulatorConstants.inputInverted));
-        }, EntryListenerFlags.kNew | EntryListenerFlags.kImmediate | EntryListenerFlags.kUpdate | EntryListenerFlags.kLocal);
-
-        deployInverted.addListener(event ->{
-            manipulatorDeploy.setInverted(deployInverted.getBoolean(Constants.ManipulatorConstants.deployInverted));
-        }, EntryListenerFlags.kNew | EntryListenerFlags.kImmediate | EntryListenerFlags.kUpdate | EntryListenerFlags.kLocal);
-
-
 
 
         manipulatorRev = new Spark(Constants.ManipulatorConstants.revPort);
+        manipulatorRev.setInverted(true);
 
         deployEncoder = new DutyCycleEncoder(Constants.deployEncoderPorts[0]);
         deployEncoder.setConnectedFrequencyThreshold(900);

@@ -47,7 +47,7 @@ public class Constants {
       public static final double suckSpeed = 0.5;
       public static final double blowSpeed = 1;
       public static final boolean inputInverted = false;
-      public static final boolean deployInverted = false;
+      public static final boolean deployInverted = true;
       public static final int revPort = 4;
     public static final double revDeadzone = 0.1;
     public static final double revOuttakeSpeed = 1;
